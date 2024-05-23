@@ -24,6 +24,7 @@ classDiagram
         String modified_by
     }
     class Review {
+        int id
         int restaurant_id
         String user_id
         int rating
