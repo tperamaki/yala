@@ -1,6 +1,8 @@
-const mockRestaurants = [
+import type { RestaurantT } from '@/types/Restaurant';
+
+const mockRestaurants: RestaurantT[] = [
   {
-    id: 1,
+    id: 'f877d912-71b1-41ad-ba94-9cf62a3f26fe',
     name: 'Rax Pizzabuffet',
     category: 'pizza',
     description: 'All you can eat buffet with pizza etc.',
@@ -13,7 +15,7 @@ const mockRestaurants = [
     ratings: 1,
   },
   {
-    id: 2,
+    id: '25a9867c-0c4c-493f-94f8-e0d93c6306db',
     name: 'Bruuveri',
     category: 'Home food',
     description: '',
