@@ -1,7 +1,7 @@
 import RestaurantCard from './RestaurantCard';
-import { getRestaurants } from '@/api/restaurants';
+import { getRestaurants } from '@/services/restaurants';
 
-async function RestaurantList() {
+const RestaurantList = async () => {
   const data = await getRestaurants();
 
   return (
@@ -12,6 +12,6 @@ async function RestaurantList() {
       })}
     </div>
   );
-}
+};
 
 export default RestaurantList;

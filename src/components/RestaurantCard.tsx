@@ -3,7 +3,7 @@ type RestaurantCardProps = {
   name: string;
 };
 
-function RestaurantCard({ averageRating, name }: RestaurantCardProps) {
+const RestaurantCard = ({ averageRating, name }: RestaurantCardProps) => {
   return (
     <div className="flex bg-white mb-4 p-6 rounded-lg shadow-md">
       <div className="flex flex-col">
@@ -12,6 +12,6 @@ function RestaurantCard({ averageRating, name }: RestaurantCardProps) {
       </div>
     </div>
   );
-}
+};
 
 export default RestaurantCard;
