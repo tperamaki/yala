@@ -29,6 +29,6 @@ const mockRestaurants: RestaurantT[] = [
   },
 ];
 
-export async function GET() {
+export const GET = async () => {
   return Response.json(mockRestaurants);
-}
+};
