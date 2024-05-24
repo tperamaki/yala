@@ -1,0 +1,36 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  checks: write
+  contents: write
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Run linters
+        uses: wearerequired/lint-action@v2
+        with:
+          auto_fix: true
+          eslint: true
+          eslint_dir: src
+          eslint_extensions: js,jsx,ts,tsx
+          prettier: true
+          prettier_dir: src
