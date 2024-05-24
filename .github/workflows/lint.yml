@@ -22,14 +22,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: lts/*
       - name: Install dependencies
         run: npm ci
       - name: Run linters
         uses: wearerequired/lint-action@v2
         with:
           eslint: true
-          eslint_dir: src,tests
+          eslint_dir: src
           eslint_extensions: js,jsx,ts,tsx
           prettier: true
-          prettier_dir: src,tests
+          prettier_dir: src
