@@ -1,14 +1,30 @@
-type RestaurantCardProps = {
-  averageRating: number;
-  name: string;
-};
+import type { RestaurantT } from '@/types/Restaurant';
+import Image from 'next/image';
 
-const RestaurantCard = ({ averageRating, name }: RestaurantCardProps) => {
+type RestaurantCardProps = Pick<
+  RestaurantT,
+  'amountOfReviews' | 'averageRating' | 'name'
+>;
+
+const RestaurantCard = ({
+  amountOfReviews,
+  averageRating,
+  name,
+}: RestaurantCardProps) => {
   return (
-    <div className="flex bg-white mb-4 p-6 rounded-lg shadow-md">
-      <div className="flex flex-col">
+    <div className="bg-white dark:bg-black dark:color-white flex flex-col hover:cursor-pointer rounded-lg shadow-md dark:shadow-neutral-600">
+      <div className="h-40 relative">
+        <Image
+          className="object-cover rounded-t-lg"
+          src="/placeholder.jpg"
+          alt="placeholder"
+          fill
+        />
+      </div>
+      <div className="flex flex-col p-4">
         <h2 className="text-lg">{name}</h2>
-        <span className="text-xs">{averageRating}</span>
+        <span className="text-right text-xs">Rating: {averageRating}</span>
+        <span className="text-right text-xs">Reviews: {amountOfReviews}</span>
       </div>
     </div>
   );
