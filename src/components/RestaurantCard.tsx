@@ -1,11 +1,16 @@
 import type { RestaurantT } from '@/types/Restaurant';
 import Image from 'next/image';
 
+type RestaurantCardProps = Pick<
+  RestaurantT,
+  'amountOfReviews' | 'averageRating' | 'name'
+>;
+
 const RestaurantCard = ({
-  averageRating,
   amountOfReviews,
+  averageRating,
   name,
-}: RestaurantT) => {
+}: RestaurantCardProps) => {
   return (
     <div className="bg-white dark:bg-black dark:color-white flex flex-col hover:cursor-pointer rounded-lg shadow-md dark:shadow-neutral-600">
       <div className="h-40 relative">
