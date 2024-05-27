@@ -7,7 +7,7 @@ const RestaurantCard = ({
   name,
 }: RestaurantT) => {
   return (
-    <div className="bg-white flex flex-col hover:cursor-pointer rounded-lg shadow-md">
+    <div className="bg-white dark:bg-black dark:color-white flex flex-col hover:cursor-pointer rounded-lg shadow-md dark:shadow-neutral-600">
       <div className="h-40 relative">
         <Image
           className="object-cover rounded-t-lg"
