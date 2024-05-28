@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
-import RestaurantCard from '../../components/RestaurantCard';
+import RestaurantCard from '@/components/RestaurantCard';
 
 test('<RestaurantCard />', () => {
   render(
