@@ -4,7 +4,7 @@ import { addReview } from '@/services/review';
 const ReviewPage = () => {
   return (
     <main className="flex min-h-screen flex-col">
-      <Form action={addReview}>
+      <Form action={addReview} label="Add review">
         <TextField id="restaurant" label="Restaurant" name="restaurant" />
         <NumberField id="rating" label="Rating" name="rating" />
       </Form>

@@ -3,12 +3,14 @@ import { ClearButton, SubmitButton } from './Buttons';
 type FormProps = {
   action: (formData: FormData) => void;
   children: React.ReactNode;
+  label: string;
 };
 
-const Form = ({ action, children }: FormProps) => {
+const Form = ({ action, children, label }: FormProps) => {
   return (
     <form
       action={action}
+      aria-label={label}
       className="max-w-screen-md flex flex-col p-8 gap-4 justify-center w-full"
     >
       {children}
