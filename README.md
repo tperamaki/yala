@@ -6,6 +6,12 @@ YALA: Yet Another Lunch App
 npm run dev
 ```
 
+## E2E tests with Playwright
+
+Playwright end to end tests are run on pull requests.
+
+Check how install and run Playwright locally: https://playwright.dev/docs/intro
+
 ```mermaid
 ---
 title: Approximate data model
