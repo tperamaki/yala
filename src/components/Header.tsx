@@ -2,7 +2,7 @@ import StyledLink from './StyledLink';
 
 const Header = () => {
   return (
-    <header>
+    <header className="mb-4">
       <nav className="p-4 bg-red-100 dark:bg-red-900 flex flex-row justify-between">
         <StyledLink href="/" variant="primary">
           Home

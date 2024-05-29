@@ -3,6 +3,7 @@ import { addReview } from '@/services/review';
 const ReviewPage = () => {
   return (
     <main className="flex min-h-screen flex-col">
+      <h2 className="text-xl text-center">Add review</h2>
       <form
         action={addReview}
         className="flex flex-col p-4 gap-2 justify-center items-center"
