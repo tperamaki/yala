@@ -12,10 +12,10 @@ const RestaurantCard = ({
   name,
 }: RestaurantCardProps) => {
   return (
-    <div className="bg-white dark:bg-black dark:color-white flex flex-col hover:cursor-pointer rounded-lg shadow-md dark:shadow-neutral-600">
-      <div className="h-40 relative">
+    <div className="dark:color-white flex flex-col rounded-lg bg-white shadow-md hover:cursor-pointer dark:bg-black dark:shadow-neutral-600">
+      <div className="relative h-40">
         <Image
-          className="object-cover rounded-t-lg"
+          className="rounded-t-lg object-cover"
           src="/placeholder.jpg"
           alt="placeholder"
           fill

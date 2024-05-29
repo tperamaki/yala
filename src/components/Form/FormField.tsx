@@ -15,7 +15,7 @@ const FormField = ({ id, label, name, type }: FormFieldProps) => {
         type={type}
         id={id}
         name={name}
-        className="dark:text-slate-800 p-2 rounded-md border border-gray-300 dark:border-slate-700 focus:ring-2 focus:ring-gray-200 dark:focus:ring-slate"
+        className="dark:focus:ring-slate rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-gray-200 dark:border-slate-700 dark:text-slate-800"
       />
     </div>
   );

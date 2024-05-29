@@ -3,11 +3,11 @@ import StyledLink from './StyledLink';
 const Header = () => {
   return (
     <header className="mb-4">
-      <nav className="p-4 bg-red-100 dark:bg-red-900 flex flex-row justify-between">
+      <nav className="flex flex-row justify-between bg-red-100 p-4 dark:bg-red-900">
         <StyledLink href="/" variant="primary">
           Home
         </StyledLink>
-        <h1 className="text-xl text-center">
+        <h1 className="text-center text-xl">
           <StyledLink href="/" variant="primary">
             Yet Another Lunch App
           </StyledLink>

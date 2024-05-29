@@ -24,7 +24,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`${className} ${variantClassNames[variant]} border-2 font-bold p-2 rounded-md max-w-max`}
+      className={`${className} ${variantClassNames[variant]} max-w-max rounded-md border-2 p-2 font-bold`}
       type={type}
     >
       {children}

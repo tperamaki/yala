@@ -11,11 +11,11 @@ const Form = ({ action, children, label }: FormProps) => {
     <form
       action={action}
       aria-label={label}
-      className="max-w-screen-md flex flex-col p-8 gap-4 justify-center w-full"
+      className="flex w-full max-w-screen-md flex-col justify-center gap-4 p-8"
     >
-      <h2 className="text-xl text-center">{label}</h2>
+      <h2 className="text-center text-xl">{label}</h2>
       {children}
-      <div className="flex flex-row gap-4 justify-end">
+      <div className="flex flex-row justify-end gap-4">
         <ClearButton />
         <SubmitButton />
       </div>
