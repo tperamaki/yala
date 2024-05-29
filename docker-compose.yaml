@@ -1,19 +1,27 @@
-version: '3.8'
-
+# For development usage!
 services:
   app:
     build:
       context: .
       target: dev
-    container_name: yala
-    restart: always
     command: npm run dev
-    environment:
-      - NODE_ENV=development
-      - PORT=3000
+    container_name: yala
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    restart: always
     volumes:
       - .:/app
       - /app/node_modules
       - /app/.next
+  database:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_DB=yala
+      - POSTGRES_PASSWORD=yala
+      - POSTGRES_USER=yala
     ports:
-      - 3000:3000
+      - 5432:5432
+    volumes:
+      - .db_data:/var/lib/postgresql/data
