@@ -1,23 +1,49 @@
 import type { HTMLInputTypeAttribute } from 'react';
 
+type FormRowProps = {
+  label: string;
+  name: string;
+  children: React.ReactNode;
+};
+
 type FormFieldProps = {
   id: string;
   label: string;
   name: string;
   type: HTMLInputTypeAttribute;
+  required?: boolean;
 };
 
-const FormField = ({ id, label, name, type }: FormFieldProps) => {
+type SelectProps = {
+  id: string;
+  label: string;
+  name: string;
+  children: React.ReactNode;
+};
+
+const inputClassNames =
+  'appearance-none dark:focus:ring-slate rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-gray-200 dark:border-slate-700 dark:text-slate-800';
+
+const FormRow = ({ label, name, children }: FormRowProps) => {
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={name}>{label}</label>
+      {children}
+    </div>
+  );
+};
+
+const FormField = ({ id, label, name, type, required }: FormFieldProps) => {
+  return (
+    <FormRow label={label} name={name}>
       <input
         type={type}
         id={id}
         name={name}
-        className="dark:focus:ring-slate rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-gray-200 dark:border-slate-700 dark:text-slate-800"
+        className={inputClassNames}
+        required={required}
       />
-    </div>
+    </FormRow>
   );
 };
 
@@ -27,4 +53,12 @@ export const NumberField = (props: Omit<FormFieldProps, 'type'>) => (
 
 export const TextField = (props: Omit<FormFieldProps, 'type'>) => (
   <FormField {...props} type="text" />
+);
+
+export const Select = ({ id, label, name, children }: SelectProps) => (
+  <FormRow label={label} name={name}>
+    <select id={id} name={name} className={inputClassNames}>
+      {children}
+    </select>
+  </FormRow>
 );

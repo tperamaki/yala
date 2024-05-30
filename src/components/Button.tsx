@@ -1,4 +1,6 @@
+'use client';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { useFormStatus } from 'react-dom';
 
 type ButtonVariant = 'primary' | 'secondary';
 
@@ -22,10 +24,12 @@ const Button = ({
   type,
   variant = 'primary',
 }: ButtonProps) => {
+  const { pending } = useFormStatus();
   return (
     <button
       className={`${className} ${variantClassNames[variant]} max-w-max rounded-md border-2 p-2 font-bold`}
       type={type}
+      disabled={pending}
     >
       {children}
     </button>

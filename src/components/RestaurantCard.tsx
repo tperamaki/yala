@@ -1,16 +1,18 @@
-import type { RestaurantT } from '@/types/Restaurant';
+import { Category, Restaurant, Review } from '@/types/generated';
 import Image from 'next/image';
 
-type RestaurantCardProps = Pick<
-  RestaurantT,
-  'amountOfReviews' | 'averageRating' | 'name'
->;
+type RestaurantCardProps = Restaurant & {
+  categories: Category[];
+  reviews: Review[];
+};
 
-const RestaurantCard = ({
-  amountOfReviews,
-  averageRating,
-  name,
-}: RestaurantCardProps) => {
+const averageRating = (reviews: Review[]) => {
+  return (
+    reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
+  );
+};
+
+const RestaurantCard = ({ name, reviews }: RestaurantCardProps) => {
   return (
     <div className="dark:color-white flex flex-col rounded-lg bg-white shadow-md hover:cursor-pointer dark:bg-black dark:shadow-neutral-600">
       <div className="relative h-40">
@@ -23,8 +25,10 @@ const RestaurantCard = ({
       </div>
       <div className="flex flex-col p-4">
         <h2 className="text-lg">{name}</h2>
-        <span className="text-right text-xs">Rating: {averageRating}</span>
-        <span className="text-right text-xs">Reviews: {amountOfReviews}</span>
+        <span className="text-right text-xs">
+          Rating: {averageRating(reviews) || 'N/A'}
+        </span>
+        <span className="text-right text-xs">Reviews: {reviews.length}</span>
       </div>
     </div>
   );

@@ -6,6 +6,10 @@ YALA: Yet Another Lunch App
 npm run dev
 ```
 
+## Datamodel
+
+[Datamodel](docs/datamodel.md)
+
 ## E2E tests with Playwright
 
 Playwright end to end tests are run on pull requests.
