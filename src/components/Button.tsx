@@ -2,7 +2,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { useFormStatus } from 'react-dom';
 
-type ButtonVariant = 'primary' | 'secondary';
+type ButtonVariant = 'primary' | 'secondary' | 'disabled';
 
 export type ButtonProps = {
   children: ReactNode;
@@ -16,18 +16,15 @@ const variantClassNames: Record<ButtonVariant, string> = {
     'bg-red-900 border-red-900 bg-red-100 text-white dark:bg-red-100 dark:border-red-100 dark:text-red-900',
   secondary:
     'border-red-900 text-red-900 bg-transparent dark:border-red-100 dark:text-red-100',
+  disabled:
+    'bg-gray-300 border-gray-300 text-gray-500 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-500',
 };
 
-const Button = ({
-  children,
-  className = '',
-  type,
-  variant = 'primary',
-}: ButtonProps) => {
+const Button = ({ children, type, variant = 'primary' }: ButtonProps) => {
   const { pending } = useFormStatus();
   return (
     <button
-      className={`${className} ${variantClassNames[variant]} max-w-max rounded-md border-2 p-2 font-bold`}
+      className={`${variantClassNames[pending ? 'disabled' : variant]} max-w-max rounded-md border-2 p-2 font-bold`}
       type={type}
       disabled={pending}
     >
