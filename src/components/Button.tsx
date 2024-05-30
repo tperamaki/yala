@@ -1,6 +1,9 @@
 'use client';
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import { useFormStatus } from 'react-dom';
+import {
+  useTransition,
+  type ButtonHTMLAttributes,
+  type ReactNode,
+} from 'react';
 
 type ButtonVariant = 'primary' | 'secondary' | 'disabled';
 
@@ -21,12 +24,11 @@ const variantClassNames: Record<ButtonVariant, string> = {
 };
 
 const Button = ({ children, type, variant = 'primary' }: ButtonProps) => {
-  const { pending } = useFormStatus();
   return (
     <button
-      className={`${variantClassNames[pending ? 'disabled' : variant]} max-w-max rounded-md border-2 p-2 font-bold`}
+      className={`${variantClassNames[variant]} max-w-max rounded-md border-2 p-2 font-bold`}
       type={type}
-      disabled={pending}
+      disabled={variant === 'disabled'}
     >
       {children}
     </button>
