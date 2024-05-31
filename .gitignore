@@ -43,3 +43,9 @@ next-env.d.ts
 
 # postgres
 .db_data
+
+# sqlite
+.yala.db
+
+# ignore generated zod types, they are re-generated in post install
+src/types/generated

@@ -1,4 +1,5 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+'use client';
+import { type ButtonHTMLAttributes, type ReactNode } from 'react';
 
 type ButtonVariant = 'primary' | 'secondary';
 
@@ -7,6 +8,7 @@ export type ButtonProps = {
   className?: string;
   type: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   variant?: ButtonVariant;
+  disabled?: boolean;
 };
 
 const variantClassNames: Record<ButtonVariant, string> = {
@@ -18,14 +20,15 @@ const variantClassNames: Record<ButtonVariant, string> = {
 
 const Button = ({
   children,
-  className = '',
   type,
+  disabled,
   variant = 'primary',
 }: ButtonProps) => {
   return (
     <button
-      className={`${className} ${variantClassNames[variant]} max-w-max rounded-md border-2 p-2 font-bold`}
+      className={`${variantClassNames[variant]} max-w-max rounded-md border-2 p-2 font-bold disabled:border-gray-300 disabled:bg-gray-300 disabled:text-gray-500`}
       type={type}
+      disabled={disabled}
     >
       {children}
     </button>

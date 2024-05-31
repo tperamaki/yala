@@ -12,9 +12,14 @@ const Header = () => {
             Yet Another Lunch App
           </StyledLink>
         </h1>
-        <StyledLink href="/review" variant="primary">
-          Add review
-        </StyledLink>
+        <div className="flex gap-4">
+          <StyledLink href="/restaurant/add" variant="primary">
+            Add restaurant
+          </StyledLink>
+          <StyledLink href="/review" variant="primary">
+            Add review
+          </StyledLink>
+        </div>
       </nav>
     </header>
   );

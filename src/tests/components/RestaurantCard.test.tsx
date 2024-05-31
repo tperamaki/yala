@@ -6,9 +6,20 @@ import RestaurantCard from '@/components/RestaurantCard';
 test('<RestaurantCard />', () => {
   render(
     <RestaurantCard
-      averageRating={3}
-      amountOfReviews={1}
+      id={1}
       name="test-restaurant"
+      createdAt={new Date()}
+      createdBy={'test-user'}
+      categories={[]}
+      reviews={[
+        {
+          id: 1,
+          rating: 3,
+          createdAt: new Date(),
+          restaurantId: 1,
+          createdBy: 'test-user',
+        },
+      ]}
     />,
   );
 

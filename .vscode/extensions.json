@@ -2,6 +2,9 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "ms-playwright.playwright"
+    "ms-playwright.playwright",
+    "prisma.prisma",
+    "qwtel.sqlite-viewer",
+    "bierner.markdown-mermaid"
   ]
 }

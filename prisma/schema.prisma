@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator zod {
+  provider          = "zod-prisma-types"
+  useMultipleFiles  = true
+  output = "../src/types/generated"
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+  output = "../docs/datamodel.md"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./.yala.db"
+}
+
+model Category {
+  id            Int          @id @default(autoincrement())
+  name          String       @unique
+  restaurants   CategoriesOnRestaurants[]
+  createdAt     DateTime     @default(now())
+  createdBy     String?
+}
+
+model Restaurant {
+  id            Int          @id @default(autoincrement())
+  name          String       @unique
+  categories    CategoriesOnRestaurants[]
+  reviews       Review[]
+  createdAt     DateTime     @default(now())
+  createdBy     String?
+}
+
+model Review {
+  id            Int          @id @default(autoincrement())
+  restaurant    Restaurant   @relation(fields: [restaurantId], references: [id])
+  restaurantId  Int
+  rating        Int
+  createdAt     DateTime     @default(now())
+  createdBy     String?
+}
+
+model CategoriesOnRestaurants {
+  category      Category     @relation(fields: [categoryId], references: [id])
+  categoryId    Int
+  restaurant    Restaurant   @relation(fields: [restaurantId], references: [id])
+  restaurantId  Int
+  assignedAt    DateTime     @default(now())
+  assignedBy    String?
+
+  @@id([categoryId, restaurantId])
+}
