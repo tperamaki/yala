@@ -1,15 +1,21 @@
+'use client';
+import { toast } from 'react-toastify';
 import { ClearButton, SubmitButton } from './Buttons';
 
 type FormProps = {
-  action: (formData: FormData) => void;
+  action: (formData: FormData) => Promise<void>;
   children: React.ReactNode;
   label: string;
+  successMessage: string;
 };
 
-const Form = ({ action, children, label }: FormProps) => {
+const Form = ({ action, children, label, successMessage }: FormProps) => {
   return (
     <form
-      action={action}
+      action={async (formData: FormData) => {
+        await action(formData);
+        toast.success(successMessage);
+      }}
       aria-label={label}
       className="flex w-full max-w-screen-md flex-col justify-center gap-4 p-8"
     >

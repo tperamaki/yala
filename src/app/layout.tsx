@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
+import ToastProvider from '@/components/ToastProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +20,7 @@ const RootLayout = ({
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        {children}
+        <ToastProvider>{children}</ToastProvider>
       </body>
     </html>
   );

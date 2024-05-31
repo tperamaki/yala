@@ -13,7 +13,7 @@ describe('<Form />', () => {
 
   it('renders correctly', () => {
     render(
-      <Form action={mockAction} label="test-form">
+      <Form action={mockAction} label="test-form" successMessage="Test success">
         <TextField
           id="test-text-field"
           label="Text field"
