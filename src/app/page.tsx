@@ -7,20 +7,18 @@ const Home = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
+  if (!user) return <div></div>;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        {user ? (
-          <div>
-            Welcome {user.name}! <a href="/api/auth/logout">Logout</a>
-            <StyledLink href="/restaurants" variant="secondary">
-              Restaurants
-            </StyledLink>
-          </div>
-        ) : (
-          <a href="/api/auth/login">Login</a>
-        )}
+        <div>
+          <p>Welcome {user.name}!</p>
+          <br />
+          <StyledLink href="/restaurants" variant="secondary">
+            Restaurants
+          </StyledLink>
+        </div>
       </div>
     </main>
   );

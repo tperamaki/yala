@@ -10,6 +10,8 @@ import {
 } from '@/types/generated';
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
+import { getSession } from '@auth0/nextjs-auth0';
+import { getUserIdFromIdToken } from './utils';
 
 const prisma = new PrismaClient();
 
@@ -32,8 +34,15 @@ export const getRestaurants = async () => {
 };
 
 export const addRestaurant = async (formData: FormData) => {
+  const session = await getSession();
+
+  if (!session?.idToken) {
+    throw new Error('Unauthorized');
+  }
+
   const payload = {
     name: formData.get('name'),
+    createdBy: getUserIdFromIdToken(session.idToken),
   };
 
   const data = RestaurantCreateInputSchema.parse(payload);
