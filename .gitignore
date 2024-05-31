@@ -46,6 +46,7 @@ next-env.d.ts
 
 # sqlite
 .yala.db
+.yala.db-journal
 
 # ignore generated zod types, they are re-generated in post install
 src/types/generated
