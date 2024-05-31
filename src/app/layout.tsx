@@ -19,10 +19,8 @@ const RootLayout = ({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ToastProvider>
-          <Header />
-          {children}
-        </ToastProvider>
+        <Header />
+        <ToastProvider>{children}</ToastProvider>
       </body>
     </html>
   );

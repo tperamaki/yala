@@ -13,8 +13,8 @@ const Form = ({ action, children, label, successMessage }: FormProps) => {
   return (
     <form
       action={async (formData: FormData) => {
-        toast.success(successMessage);
         await action(formData);
+        toast.success(successMessage);
       }}
       aria-label={label}
       className="flex w-full max-w-screen-md flex-col justify-center gap-4 p-8"
