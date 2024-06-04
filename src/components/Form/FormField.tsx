@@ -33,7 +33,12 @@ const FormRow = ({ error, label, name, children }: FormRowProps) => {
       <label htmlFor={name}>{label}</label>
       {children}
       {error && (
-        <p aria-live="polite" className="text-red-500">
+        <p
+          aria-live="polite"
+          className="text-red-500"
+          data-testid={`${name}-error`}
+          id={`${name}-error`}
+        >
           {error}
         </p>
       )}
@@ -52,6 +57,8 @@ const FormField = ({
   return (
     <FormRow error={error} label={label} name={name}>
       <input
+        aria-invalid={!!error}
+        aria-errormessage={`${name}-error`}
         type={type}
         id={id}
         name={name}
