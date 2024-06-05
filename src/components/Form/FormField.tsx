@@ -24,9 +24,6 @@ type SelectFieldProps = {
   label: FormFieldProps['label'];
 } & SelectProps;
 
-const inputClassNames =
-  'appearance-none dark:focus:ring-slate rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-gray-200 dark:border-slate-700 dark:text-slate-800';
-
 const FormRow = ({ error, label, name, children }: FormRowProps) => {
   return (
     <div className="flex flex-col gap-2">
@@ -62,7 +59,7 @@ const FormField = ({
         type={type}
         id={id}
         name={name}
-        className={inputClassNames}
+        className="input-field"
         required={required}
       />
     </FormRow>
@@ -81,7 +78,7 @@ export const SelectField = ({
   options,
 }: SelectFieldProps) => (
   <FormRow error={error} label={label} name={name}>
-    <Select id={id} name={name} className={inputClassNames} options={options} />
+    <Select id={id} name={name} options={options} />
   </FormRow>
 );
 

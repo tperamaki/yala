@@ -1,13 +1,12 @@
 export type SelectProps = {
-  className?: string;
   id: string;
   name: string;
   options: { key: number | string; label: string; value: number | string }[];
 };
 
-const Select = ({ className = '', id, name, options }: SelectProps) => {
+const Select = ({ id, name, options }: SelectProps) => {
   return (
-    <select id={id} name={name} className={className}>
+    <select id={id} name={name} className="input-field">
       {options.map(({ key, label, value }) => (
         <option key={key} value={value}>
           {label}
