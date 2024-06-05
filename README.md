@@ -1,4 +1,4 @@
-YALA: Yet Another Lunch App
+YALA - Yet Another Lunch App
 
 ## Getting Started
 
