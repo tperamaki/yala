@@ -3,7 +3,8 @@ import { addReview } from '@/services/review';
 import Form from './Form';
 import { z } from 'zod';
 import { ReviewCreateInputSchema } from '@/types/generated';
-import { NumberField, SelectField, SelectProps } from './FormField';
+import { NumberField, SelectField } from './FormField';
+import type { SelectProps } from '../Select';
 import { useFormState } from 'react-dom';
 import { toast } from 'react-toastify';
 import { redirect } from 'next/navigation';
@@ -27,28 +28,29 @@ const initialState: AddReviewFormState = {
   rating: 0,
 };
 
+const myAddReview = async (
+  prevState: AddReviewFormState,
+  formData: FormData,
+) => {
+  const response = await addReview(prevState, formData);
+
+  if (response.errors === undefined) {
+    toast.success('Review added!');
+    redirect('/restaurants');
+  }
+
+  if (
+    response.errors &&
+    'send' in response.errors &&
+    response.errors.send !== undefined
+  ) {
+    toast.error('Failed to add review');
+  }
+
+  return response;
+};
+
 const AddReviewForm = ({ restaurantOptions }: AddReviewFormProps) => {
-  const myAddReview = async (
-    prevState: AddReviewFormState,
-    formData: FormData,
-  ) => {
-    const response = await addReview(prevState, formData);
-
-    if (response.errors === undefined) {
-      toast.success('Review added!');
-      redirect('/restaurants');
-    }
-
-    if (
-      response.errors &&
-      'send' in response.errors &&
-      response.errors.send !== undefined
-    ) {
-      toast.error('Failed to add review');
-    }
-
-    return response;
-  };
   const [state, formAction] = useFormState(myAddReview, initialState);
 
   return (
