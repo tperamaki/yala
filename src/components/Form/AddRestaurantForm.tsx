@@ -40,7 +40,6 @@ const AddRestaurantForm = () => {
         toast.error('Failed to add restaurant');
       }
 
-
       return response;
     },
     initialState,
