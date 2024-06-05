@@ -3,14 +3,14 @@ import { addReview } from '@/services/review';
 import Form from './Form';
 import { z } from 'zod';
 import { ReviewCreateInputSchema } from '@/types/generated';
-import { NumberField, SelectField } from './FormField';
-import type { SelectProps } from '../Select';
+import { NumberField, SelectFieldAsync } from './FormField';
+import type { SelectAsyncProps } from '../Select';
 import { useFormState } from 'react-dom';
 import { toast } from 'react-toastify';
 import { redirect } from 'next/navigation';
 
 type AddReviewFormProps = {
-  restaurantOptions: SelectProps['options'];
+  restaurantOptions: SelectAsyncProps['options'];
 };
 
 type AddReviewFormState = {
@@ -55,7 +55,7 @@ const AddReviewForm = ({ restaurantOptions }: AddReviewFormProps) => {
 
   return (
     <Form action={formAction} label="Add review">
-      <SelectField
+      <SelectFieldAsync
         error={state.errors?.restaurant?.at(0)}
         id="restaurant"
         label="Restaurant"

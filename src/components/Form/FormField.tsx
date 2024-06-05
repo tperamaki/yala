@@ -1,7 +1,7 @@
 import type { HTMLInputTypeAttribute } from 'react';
 
-import Select from '../Select';
-import type { SelectProps } from '../Select';
+import Select, { SelectAsyncWithSuspense } from '../Select';
+import type { SelectAsyncProps, SelectProps } from '../Select';
 
 type FormRowProps = {
   error?: string;
@@ -23,6 +23,11 @@ type SelectFieldProps = {
   error: FormFieldProps['error'];
   label: FormFieldProps['label'];
 } & SelectProps;
+
+type SelectAsyncFieldProps = {
+  error: FormFieldProps['error'];
+  label: FormFieldProps['label'];
+} & SelectAsyncProps;
 
 const FormRow = ({ error, label, name, children }: FormRowProps) => {
   return (
@@ -79,6 +84,12 @@ export const SelectField = ({
 }: SelectFieldProps) => (
   <FormRow error={error} label={label} name={name}>
     <Select id={id} name={name} options={options} />
+  </FormRow>
+);
+
+export const SelectFieldAsync = (props: SelectAsyncFieldProps) => (
+  <FormRow error={props.error} label={props.label} name={props.name}>
+    <SelectAsyncWithSuspense {...props} />
   </FormRow>
 );
 
