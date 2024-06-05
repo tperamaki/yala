@@ -33,6 +33,23 @@ export const getRestaurants = async () => {
     .parseAsync(data);
 };
 
+export const getRestaurant = async (id: number) => {
+  const data = await prisma.restaurant.findFirst({
+    where: {
+      id,
+    },
+    include: {
+      categories: true,
+      reviews: true,
+    },
+  });
+
+  return RestaurantSchema.extend({
+    categories: z.array(CategorySchema),
+    reviews: z.array(ReviewSchema),
+  }).parseAsync(data);
+};
+
 export const addRestaurant = async (formData: FormData) => {
   const session = await getSession();
 
