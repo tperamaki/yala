@@ -11,12 +11,6 @@ import { z } from 'zod';
 
 const prisma = new PrismaClient();
 
-type AddReviewFormState = {
-  errors?: {
-    [key in keyof z.infer<typeof ReviewCreateInputSchema>]?: string[];
-  } & { send?: string[] };
-} & z.infer<typeof ReviewCreateInputSchema>;
-
 export const getReviews = async (restaurantId: number) => {
   const findManyArgs = ReviewFindManyArgsSchema.parse({
     where: { restaurantId },
@@ -26,10 +20,10 @@ export const getReviews = async (restaurantId: number) => {
     .parseAsync(await prisma.review.findMany(findManyArgs));
 };
 
-export const addReview = async (
-  prevState: AddReviewFormState,
+export const addReview = async <State>(
+  prevState: State,
   formData: FormData,
-): Promise<AddReviewFormState> => {
+) => {
   const payload = {
     restaurant: {
       connect: { id: parseInt(String(formData.get('restaurant')), 10) },
