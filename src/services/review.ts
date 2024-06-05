@@ -52,7 +52,6 @@ export const addReview = async <State>(
 
   try {
     await prisma.review.create({ data: validatedFields.data });
-    console.log('Created a new review');
     return { ...validatedFields.data, errors: undefined };
   } catch (error) {
     console.error(error);

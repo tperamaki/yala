@@ -62,7 +62,6 @@ export const addRestaurant = async <State>(
 
   try {
     await prisma.restaurant.create({ data: validatedFields.data });
-    console.log('Created a new restaurant');
     return { ...validatedFields.data, errors: undefined };
   } catch (error) {
     console.error(error);
