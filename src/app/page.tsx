@@ -22,7 +22,6 @@ const Home = () => {
       </div>
     </main>
   );
-
 };
 
 export default Home;
