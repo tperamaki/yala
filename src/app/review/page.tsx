@@ -2,15 +2,14 @@ import { AddReviewForm } from '@/components/Form';
 import { getRestaurants } from '@/services/restaurants';
 
 const ReviewPage = async () => {
-  const restaurants = await getRestaurants();
-  const restaurantOptions = [
+  const restaurantOptions = getRestaurants().then((r) => [
     { key: 'default', label: 'Please choose an option', value: '' },
-    ...restaurants.map((restaurant) => ({
-      key: restaurant.id,
-      label: restaurant.name,
-      value: restaurant.id,
+    ...r.map(({ id, name }) => ({
+      key: id,
+      label: name,
+      value: id,
     })),
-  ];
+  ]);
 
   return (
     <main className="flex min-h-screen flex-col">
