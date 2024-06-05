@@ -9,7 +9,6 @@ import {
   ReviewSchema,
 } from '@/types/generated';
 import { z } from 'zod';
-import { redirect } from 'next/navigation';
 
 const prisma = new PrismaClient();
 
@@ -31,14 +30,35 @@ export const getRestaurants = async () => {
     .parseAsync(data);
 };
 
-export const addRestaurant = async (formData: FormData) => {
+export const addRestaurant = async <State>(
+  prevState: State,
+  formData: FormData,
+) => {
   const payload = {
     name: formData.get('name'),
   };
 
-  const data = RestaurantCreateInputSchema.parse(payload);
+  const validatedFields = await RestaurantCreateInputSchema.refine(
+    (data) => data.name !== '',
+    { message: 'Name must not be empty', path: ['name'] },
+  ).safeParseAsync(payload);
 
-  await prisma.restaurant.create({ data });
+  if (!validatedFields.success) {
+    return {
+      ...prevState,
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
 
-  redirect('/restaurants');
+  try {
+    await prisma.restaurant.create({ data: validatedFields.data });
+    console.log('Created a new restaurant');
+    return { ...validatedFields.data, errors: undefined };
+  } catch (error) {
+    console.error(error);
+    return {
+      ...prevState,
+      errors: { send: ['Failed to submit a restaurant'] },
+    };
+  }
 };
