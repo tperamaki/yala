@@ -23,7 +23,6 @@ const Home = () => {
     </main>
   );
 
-  return;
 };
 
 export default Home;
