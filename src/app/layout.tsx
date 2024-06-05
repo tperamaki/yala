@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import ToastProvider from '@/components/ToastProvider';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,10 +19,12 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        <ToastProvider>{children}</ToastProvider>
-      </body>
+      <UserProvider>
+        <body className={inter.className}>
+          <Header />
+          <ToastProvider>{children}</ToastProvider>
+        </body>
+      </UserProvider>
     </html>
   );
 };
