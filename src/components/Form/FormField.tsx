@@ -1,12 +1,17 @@
 import type { HTMLInputTypeAttribute } from 'react';
 
+import Select, { SelectAsyncWithSuspense } from '../Select';
+import type { SelectAsyncProps, SelectProps } from '../Select';
+
 type FormRowProps = {
+  error?: string;
   label: string;
   name: string;
   children: React.ReactNode;
 };
 
 type FormFieldProps = {
+  error?: string;
   id: string;
   label: string;
   name: string;
@@ -14,33 +19,52 @@ type FormFieldProps = {
   required?: boolean;
 };
 
-type SelectProps = {
-  id: string;
-  label: string;
-  name: string;
-  children: React.ReactNode;
-};
+type SelectFieldProps = {
+  error: FormFieldProps['error'];
+  label: FormFieldProps['label'];
+} & SelectProps;
 
-const inputClassNames =
-  'appearance-none dark:focus:ring-slate rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-gray-200 dark:border-slate-700 dark:text-slate-800';
+type SelectAsyncFieldProps = {
+  error: FormFieldProps['error'];
+  label: FormFieldProps['label'];
+} & SelectAsyncProps;
 
-const FormRow = ({ label, name, children }: FormRowProps) => {
+const FormRow = ({ error, label, name, children }: FormRowProps) => {
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={name}>{label}</label>
       {children}
+      {error && (
+        <p
+          aria-live="polite"
+          className="text-red-500"
+          data-testid={`${name}-error`}
+          id={`${name}-error`}
+        >
+          {error}
+        </p>
+      )}
     </div>
   );
 };
 
-const FormField = ({ id, label, name, type, required }: FormFieldProps) => {
+const FormField = ({
+  error,
+  id,
+  label,
+  name,
+  type,
+  required,
+}: FormFieldProps) => {
   return (
-    <FormRow label={label} name={name}>
+    <FormRow error={error} label={label} name={name}>
       <input
+        aria-invalid={!!error}
+        aria-errormessage={`${name}-error`}
         type={type}
         id={id}
         name={name}
-        className={inputClassNames}
+        className="appearance-none rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-gray-200 dark:border-slate-700 dark:text-slate-800 dark:focus:ring-slate-950"
         required={required}
       />
     </FormRow>
@@ -51,14 +75,24 @@ export const NumberField = (props: Omit<FormFieldProps, 'type'>) => (
   <FormField {...props} type="number" />
 );
 
-export const TextField = (props: Omit<FormFieldProps, 'type'>) => (
-  <FormField {...props} type="text" />
+export const SelectField = ({
+  error,
+  id,
+  label,
+  name,
+  options,
+}: SelectFieldProps) => (
+  <FormRow error={error} label={label} name={name}>
+    <Select id={id} name={name} options={options} />
+  </FormRow>
 );
 
-export const Select = ({ id, label, name, children }: SelectProps) => (
-  <FormRow label={label} name={name}>
-    <select id={id} name={name} className={inputClassNames}>
-      {children}
-    </select>
+export const SelectFieldAsync = (props: SelectAsyncFieldProps) => (
+  <FormRow error={props.error} label={props.label} name={props.name}>
+    <SelectAsyncWithSuspense {...props} />
   </FormRow>
+);
+
+export const TextField = (props: Omit<FormFieldProps, 'type'>) => (
+  <FormField {...props} type="text" />
 );
