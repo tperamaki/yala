@@ -1,6 +1,8 @@
 {
-  "extends": ["next/core-web-vitals", "prettier"],
+  "extends": ["next/core-web-vitals", "plugin:promise/recommended", "prettier"],
+  "plugins": ["promise"],
   "rules": {
-    "func-style": ["error", "expression"]
+    "func-style": ["error", "expression"],
+    "promise/prefer-await-to-then": "error"
   }
 }
