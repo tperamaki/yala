@@ -28,7 +28,7 @@ const initialState: AddReviewFormState = {
   rating: 0,
 };
 
-const myAddReview = async (
+const addReviewAction = async (
   prevState: AddReviewFormState,
   formData: FormData,
 ) => {
@@ -51,7 +51,7 @@ const myAddReview = async (
 };
 
 const AddReviewForm = ({ restaurantOptions }: AddReviewFormProps) => {
-  const [state, formAction] = useFormState(myAddReview, initialState);
+  const [state, formAction] = useFormState(addReviewAction, initialState);
 
   return (
     <Form action={formAction} label="Add review">
