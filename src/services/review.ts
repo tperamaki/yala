@@ -23,7 +23,10 @@ export const getReviews = async (restaurantId: number) => {
     .parseAsync(await prisma.review.findMany(findManyArgs));
 };
 
-export const addReview = async (formData: FormData) => {
+export const addReview = async <State>(
+  prevState: State,
+  formData: FormData,
+) => {
   const session = await getSession();
 
   if (!session?.idToken) {
@@ -38,9 +41,20 @@ export const addReview = async (formData: FormData) => {
     createdBy: getUserIdFromIdToken(session.idToken),
   };
 
-  const data = ReviewCreateInputSchema.parse(payload);
+  const validatedFields = await ReviewCreateInputSchema.safeParseAsync(payload);
 
-  await prisma.review.create({ data });
+  if (!validatedFields.success) {
+    return {
+      ...prevState,
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
 
-  redirect('/restaurants');
+  try {
+    await prisma.review.create({ data: validatedFields.data });
+    return { ...validatedFields.data, errors: undefined };
+  } catch (error) {
+    console.error(error);
+    return { ...prevState, errors: { send: ['Failed to submit review'] } };
+  }
 };

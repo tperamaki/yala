@@ -50,7 +50,10 @@ export const getRestaurant = async (id: number) => {
   }).parseAsync(data);
 };
 
-export const addRestaurant = async (formData: FormData) => {
+export const addRestaurant = async <State>(
+  prevState: State,
+  formData: FormData,
+) => {
   const session = await getSession();
 
   if (!session?.idToken) {
@@ -62,9 +65,26 @@ export const addRestaurant = async (formData: FormData) => {
     createdBy: getUserIdFromIdToken(session.idToken),
   };
 
-  const data = RestaurantCreateInputSchema.parse(payload);
+  const validatedFields = await RestaurantCreateInputSchema.refine(
+    (data) => data.name !== '',
+    { message: 'Name must not be empty', path: ['name'] },
+  ).safeParseAsync(payload);
 
-  await prisma.restaurant.create({ data });
+  if (!validatedFields.success) {
+    return {
+      ...prevState,
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
 
-  redirect('/restaurants');
+  try {
+    await prisma.restaurant.create({ data: validatedFields.data });
+    return { ...validatedFields.data, errors: undefined };
+  } catch (error) {
+    console.error(error);
+    return {
+      ...prevState,
+      errors: { send: ['Failed to submit a restaurant'] },
+    };
+  }
 };
