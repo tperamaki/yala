@@ -1,5 +1,4 @@
-import { AddRestaurantForm, Form, TextField } from '@/components/Form';
-import { addRestaurant } from '@/services/restaurants';
+import { AddRestaurantForm } from '@/components/Form';
 
 const AddRestaurantPage = () => {
   return (
