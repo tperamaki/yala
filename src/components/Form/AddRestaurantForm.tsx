@@ -22,28 +22,30 @@ const initialState: RestaurantFormState = {
   name: '',
 };
 
+const addRestaurantAction = async (
+  prevState: RestaurantFormState,
+  formData: FormData,
+) => {
+  const response = await addRestaurant(prevState, formData);
+
+  if (response.errors === undefined) {
+    toast.success('Restaurant added!');
+    redirect('/restaurants');
+  }
+
+  if (
+    response.errors &&
+    'send' in response.errors &&
+    response.errors.send !== undefined
+  ) {
+    toast.error('Failed to add restaurant');
+  }
+
+  return response;
+};
+
 const AddRestaurantForm = () => {
-  const [state, formAction] = useFormState(
-    async (prevState: RestaurantFormState, formData: FormData) => {
-      const response = await addRestaurant(prevState, formData);
-
-      if (response.errors === undefined) {
-        toast.success('Restaurant added!');
-        redirect('/restaurants');
-      }
-
-      if (
-        response.errors &&
-        'send' in response.errors &&
-        response.errors.send !== undefined
-      ) {
-        toast.error('Failed to add restaurant');
-      }
-
-      return response;
-    },
-    initialState,
-  );
+  const [state, formAction] = useFormState(addRestaurantAction, initialState);
 
   return (
     <Form action={formAction} label="Add restaurant">
