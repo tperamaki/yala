@@ -6,10 +6,10 @@ type Params = {
 };
 
 export const GET = async (_request: Request, context: { params: Params }) => {
-  return getReviews(parseInt(context.params.id, 10))
-    .then(NextResponse.json)
-    .catch((error) => {
-      console.error(error);
-      return NextResponse.error();
-    });
+  try {
+    return NextResponse.json(await getReviews(parseInt(context.params.id, 10)));
+  } catch (error) {
+    console.error(error);
+    return NextResponse.error();
+  }
 };

@@ -11,15 +11,8 @@ test('<RestaurantCard />', () => {
       createdAt={new Date()}
       createdBy={'test-user'}
       categories={[]}
-      reviews={[
-        {
-          id: 1,
-          rating: 3,
-          createdAt: new Date(),
-          restaurantId: 1,
-          createdBy: 'test-user',
-        },
-      ]}
+      averageReview={3}
+      reviewCount={1}
     />,
   );
 
