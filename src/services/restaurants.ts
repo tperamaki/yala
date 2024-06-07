@@ -3,17 +3,33 @@ import 'server-only';
 
 import { PrismaClient } from '@prisma/client';
 import {
+  Category,
   CategorySchema,
+  Restaurant,
   RestaurantCreateInputSchema,
   RestaurantSchema,
-  ReviewSchema,
+  Review,
 } from '@/types/generated';
 import { z } from 'zod';
-import { redirect } from 'next/navigation';
 import { getSession } from '@auth0/nextjs-auth0';
 import { getUserIdFromIdToken } from './utils';
 
 const prisma = new PrismaClient();
+
+const enhanceRestaurant = (
+  restaurant: Restaurant & {
+    reviews: Review[];
+  },
+) => {
+  const { reviews, ...rest } = restaurant;
+  const averageReview =
+    reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
+  return {
+    ...rest,
+    averageReview: isNaN(averageReview) ? undefined : averageReview,
+    reviewCount: reviews.length,
+  };
+};
 
 export const getRestaurants = async () => {
   const data = await prisma.restaurant.findMany({
@@ -27,10 +43,33 @@ export const getRestaurants = async () => {
     .array(
       RestaurantSchema.extend({
         categories: z.array(CategorySchema),
-        reviews: z.array(ReviewSchema),
+        averageReview: z.number().optional(),
+        reviewCount: z.number(),
       }),
     )
-    .parseAsync(data);
+    .parseAsync(data.map(enhanceRestaurant));
+};
+
+export const getRestaurant = async (id: number) => {
+  const data = await prisma.restaurant.findFirst({
+    where: {
+      id,
+    },
+    include: {
+      categories: true,
+      reviews: true,
+    },
+  });
+
+  if (!data) {
+    return null;
+  }
+
+  return RestaurantSchema.extend({
+    categories: z.array(CategorySchema),
+    averageReview: z.number(),
+    reviewCount: z.number(),
+  }).parseAsync(enhanceRestaurant(data));
 };
 
 export const addRestaurant = async <State>(
