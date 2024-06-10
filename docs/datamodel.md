@@ -13,15 +13,14 @@ erDiagram
     Int id "🗝️"
     String name 
     DateTime createdAt 
-    String createdBy "❓"
+    String createdBy 
     }
   
 
   "Review" {
-    Int id "🗝️"
     Int rating 
     DateTime createdAt 
-    String createdBy "❓"
+    String createdBy "🗝️"
     }
   
 
