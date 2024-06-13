@@ -22,19 +22,6 @@ export const getReviews = async (restaurantId: number) => {
     .parseAsync(await prisma.review.findMany(findManyArgs));
 };
 
-export const getUserReviews = async () => {
-  const session = await getSession();
-
-  if (!session?.idToken) {
-    throw new Error('Unauthorized');
-  }
-
-  const userId = getUserIdFromIdToken(session.idToken);
-  return z
-    .array(ReviewSchema)
-    .parseAsync(await prisma.review.findMany({ where: { createdBy: userId } }));
-};
-
 export const addReview = async <State>(
   prevState: State,
   formData: FormData,

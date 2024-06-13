@@ -31,8 +31,6 @@ const enhanceRestaurant = (
 };
 
 export const getRestaurants = async () => {
-  // sleep 2 seconds
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   const data = await prisma.restaurant.findMany({
     include: {
       categories: true,
