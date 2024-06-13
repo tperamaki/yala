@@ -1,17 +1,21 @@
 import { Suspense, use } from 'react';
 
+type Option = { key: number | string; label: string; value: number | string };
+
 export type SelectProps = {
   disabled?: boolean;
   id: string;
   name: string;
-  options: { key: number | string; label: string; value: number | string }[];
+  options: Option[] | Promise<Option[]>;
 };
 
-export type SelectAsyncProps = {
-  options: Promise<SelectProps['options']>;
-} & Omit<SelectProps, 'options'>;
-
-const Select = ({ disabled = false, id, name, options }: SelectProps) => {
+const SelectComponent = ({
+  disabled = false,
+  id,
+  name,
+  options,
+}: SelectProps) => {
+  const useOptions = Array.isArray(options) ? options : use(options);
   return (
     <select
       aria-disabled={disabled}
@@ -20,7 +24,7 @@ const Select = ({ disabled = false, id, name, options }: SelectProps) => {
       name={name}
       className="appearance-none rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-gray-200 dark:border-slate-700 dark:text-slate-800 dark:focus:ring-slate-950"
     >
-      {options.map(({ key, label, value }) => (
+      {useOptions.map(({ key, label, value }) => (
         <option key={key} value={value}>
           {label}
         </option>
@@ -29,16 +33,11 @@ const Select = ({ disabled = false, id, name, options }: SelectProps) => {
   );
 };
 
-export const SelectAsync = (props: SelectAsyncProps) => {
-  const useOptions = use(props.options);
-  return <Select {...props} options={useOptions} />;
-};
-
-export const SelectAsyncWithSuspense = (props: SelectAsyncProps) => {
+export const Select = (props: SelectProps) => {
   return (
     <Suspense
       fallback={
-        <Select
+        <SelectComponent
           disabled
           id={props.id}
           name={props.name}
@@ -46,7 +45,7 @@ export const SelectAsyncWithSuspense = (props: SelectAsyncProps) => {
         />
       }
     >
-      <SelectAsync {...props} />
+      <SelectComponent {...props} />
     </Suspense>
   );
 };
