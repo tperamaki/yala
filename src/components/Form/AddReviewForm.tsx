@@ -3,9 +3,9 @@ import Form from './Form';
 import { z } from 'zod';
 import { ReviewCreateInputSchema } from '@/types/generated';
 import { NumberField, SelectField } from './FormField';
-import { useFormState } from 'react-dom';
 import { addReviewAction } from '@/actions/addReview';
 import { SelectProps } from '../Select';
+import { useActionState } from 'react';
 
 type InputType = Omit<z.infer<typeof ReviewCreateInputSchema>, 'createdBy'>;
 
@@ -27,7 +27,7 @@ const initialState: AddReviewFormState = {
 const AddReviewForm = (props: {
   restaurantOptions: SelectProps['options'];
 }) => {
-  const [state, formAction] = useFormState(addReviewAction, initialState);
+  const [state, formAction] = useActionState(addReviewAction, initialState);
 
   return (
     <Form action={formAction} label="Add review">

@@ -1,10 +1,10 @@
 'use client';
-import { useFormState } from 'react-dom';
 import Form from './Form';
 import { TextField } from './FormField';
 import { z } from 'zod';
 import { RestaurantCreateInputSchema } from '@/types/generated';
 import { addRestaurantAction } from '@/actions/addRestaurant';
+import { useActionState } from 'react';
 
 type InputType = Omit<z.infer<typeof RestaurantCreateInputSchema>, 'createdBy'>;
 
@@ -21,7 +21,7 @@ const initialState: RestaurantFormState = {
 };
 
 const AddRestaurantForm = () => {
-  const [state, formAction] = useFormState(addRestaurantAction, initialState);
+  const [state, formAction] = useActionState(addRestaurantAction, initialState);
 
   return (
     <Form action={formAction} label="Add restaurant">
