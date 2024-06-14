@@ -32,16 +32,17 @@ model Restaurant {
   categories    CategoriesOnRestaurants[]
   reviews       Review[]
   createdAt     DateTime     @default(now())
-  createdBy     String?
+  createdBy     String
 }
 
 model Review {
-  id            Int          @id @default(autoincrement())
   restaurant    Restaurant   @relation(fields: [restaurantId], references: [id])
   restaurantId  Int
   rating        Int
   createdAt     DateTime     @default(now())
-  createdBy     String?
+  createdBy     String
+
+  @@id([restaurantId, createdBy])
 }
 
 model CategoriesOnRestaurants {

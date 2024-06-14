@@ -3,7 +3,6 @@ import 'server-only';
 
 import { PrismaClient } from '@prisma/client';
 import {
-  Category,
   CategorySchema,
   Restaurant,
   RestaurantCreateInputSchema,

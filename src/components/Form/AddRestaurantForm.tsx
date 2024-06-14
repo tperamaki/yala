@@ -2,46 +2,22 @@
 import { useFormState } from 'react-dom';
 import Form from './Form';
 import { TextField } from './FormField';
-import { addRestaurant } from '@/services/restaurants';
-import { toast } from 'react-toastify';
-import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { RestaurantCreateInputSchema } from '@/types/generated';
+import { addRestaurantAction } from '@/actions/addRestaurant';
 
-type RestaurantCreateInputSchemaT = z.infer<typeof RestaurantCreateInputSchema>;
+type InputType = Omit<z.infer<typeof RestaurantCreateInputSchema>, 'createdBy'>;
 
-type RestaurantFormState = {
+export type RestaurantFormState = {
   errors?: {
-    [key in keyof RestaurantCreateInputSchemaT]?: string[];
+    [key in keyof InputType]?: string[];
   } & {
     send?: string[];
   };
-} & RestaurantCreateInputSchemaT;
+} & InputType;
 
 const initialState: RestaurantFormState = {
   name: '',
-};
-
-const addRestaurantAction = async (
-  prevState: RestaurantFormState,
-  formData: FormData,
-) => {
-  const response = await addRestaurant(prevState, formData);
-
-  if (response.errors === undefined) {
-    toast.success('Restaurant added!');
-    redirect('/restaurants');
-  }
-
-  if (
-    response.errors &&
-    'send' in response.errors &&
-    response.errors.send !== undefined
-  ) {
-    toast.error('Failed to add restaurant');
-  }
-
-  return response;
 };
 
 const AddRestaurantForm = () => {
