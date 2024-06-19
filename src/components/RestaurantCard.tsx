@@ -1,17 +1,11 @@
-import { Category, Restaurant, Review } from '@/types/generated';
+import { EnrichedRestaurant } from '@/hooks/RestaurantHook';
 import Image from 'next/image';
-
-type RestaurantCardProps = Restaurant & {
-  categories: Category[];
-  averageReview?: number;
-  reviewCount: number;
-};
 
 const RestaurantCard = ({
   name,
   averageReview,
   reviewCount,
-}: RestaurantCardProps) => {
+}: EnrichedRestaurant) => {
   return (
     <div className="dark:color-white flex flex-col rounded-lg bg-white shadow-md hover:cursor-pointer dark:bg-black dark:shadow-neutral-600">
       <div className="relative h-40">

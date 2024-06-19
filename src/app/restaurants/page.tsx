@@ -1,8 +1,9 @@
+'use client';
 import RestaurantList from '@/components/RestaurantList';
 
 const RestaurantsPage = () => {
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="m-24 flex min-h-screen flex-col">
       <RestaurantList />
     </main>
   );
