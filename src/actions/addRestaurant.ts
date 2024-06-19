@@ -11,7 +11,7 @@ export const addRestaurantAction = async (
 
   if (response.errors === undefined) {
     toast.success('Restaurant added!');
-    redirect('/restaurants');
+    redirect('/restaurant');
   }
 
   if (
