@@ -1,3 +1,4 @@
+'use client';
 import RestaurantList from '@/components/RestaurantList';
 
 const RestaurantsPage = () => {

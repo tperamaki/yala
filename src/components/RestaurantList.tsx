@@ -1,8 +1,8 @@
 import RestaurantCard from './RestaurantCard';
-import { getRestaurants } from '@/services/restaurants';
+import { useGetRestaurants } from '@/hooks/RestaurantHook';
 
-const RestaurantList = async () => {
-  const data = await getRestaurants();
+const RestaurantList = () => {
+  const { data, isLoading, isError } = useGetRestaurants();
 
   return (
     <div className="max-w-screen-xl py-4 md:m-auto">
