@@ -8,6 +8,7 @@ const RestaurantList = () => {
   const [search, setSearch] = useState('');
   const fuse = new Fuse(data, {
     keys: ['name'],
+    threshold: 0.4,
   });
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
