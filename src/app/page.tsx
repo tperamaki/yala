@@ -15,7 +15,7 @@ const Home = () => {
         <div>
           <p>Welcome {user.name}!</p>
           <br />
-          <StyledLink href="/restaurants" variant="secondary">
+          <StyledLink href="/restaurant" variant="secondary">
             Restaurants
           </StyledLink>
         </div>

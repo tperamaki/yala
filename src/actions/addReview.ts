@@ -11,7 +11,7 @@ export const addReviewAction = async (
 
   if (response.errors === undefined) {
     toast.success('Review added!');
-    redirect('/restaurants');
+    redirect('/restaurant');
   }
 
   if (
