@@ -34,7 +34,7 @@ export const addReview = async <State>(
 
   const payload = {
     restaurant: {
-      connect: { id: parseInt(String(formData.get('restaurant')), 10) },
+      connect: { id: parseInt(String(formData.get('restaurantId')), 10) },
     },
     rating: parseInt(String(formData.get('rating')), 10),
     createdBy: getUserIdFromIdToken(session.idToken),

@@ -24,20 +24,12 @@ const initialState: AddReviewFormState = {
   rating: 0,
 };
 
-const AddReviewForm = (props: {
-  restaurantOptions: SelectProps['options'];
-}) => {
+const AddReviewForm = (props: { restaurantId: number }) => {
   const [state, formAction] = useFormState(addReviewAction, initialState);
 
   return (
     <Form action={formAction} label="Add review">
-      <SelectField
-        error={state.errors?.restaurant?.at(0)}
-        id="restaurant"
-        label="Restaurant"
-        name="restaurant"
-        options={props.restaurantOptions}
-      />
+      <input type="hidden" name="restaurantId" value={props.restaurantId} />
       <NumberField
         error={state.errors?.rating?.at(0)}
         id="rating"

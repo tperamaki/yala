@@ -13,9 +13,6 @@ const Header = () => {
           <StyledLink href="/restaurant/add" variant="primary">
             Add restaurant
           </StyledLink>
-          <StyledLink href="/review" variant="primary">
-            Add review
-          </StyledLink>
         </div>
         <a
           href="/api/auth/logout"
