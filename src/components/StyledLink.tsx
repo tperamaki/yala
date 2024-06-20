@@ -14,7 +14,7 @@ const StyledLink = ({ href, variant, children }: StyledLinkProps) => {
       href={href}
       className={
         variant === 'primary'
-          ? 'text-red-900 hover:text-red-700 dark:text-white hover:dark:text-red-300'
+          ? 'hover:text-red-700 hover:dark:text-red-300'
           : 'text-red-700 hover:text-red-500 dark:text-red-300'
       }
     >

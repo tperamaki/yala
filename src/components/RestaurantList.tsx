@@ -20,7 +20,7 @@ const RestaurantList = () => {
     : data;
 
   return (
-    <div className="max-w-screen-xl py-4">
+    <div className="grow p-4">
       <h2 className="mb-4 text-xl">Restaurants</h2>
       <div className="mb-4">
         <input

@@ -1,4 +1,4 @@
-import { getRestaurants } from '@/services/restaurants';
+import { getRestaurant, getRestaurants } from '@/services/restaurants';
 import { HookReturnType } from '@/types/general';
 import { Category, Restaurant } from '@prisma/client';
 import { useEffect, useState } from 'react';
@@ -28,6 +28,35 @@ export const useGetRestaurants = (): HookReturnType<EnrichedRestaurant[]> => {
 
     fetchData();
   }, []);
+
+  return {
+    data,
+    isLoading,
+    isError,
+  };
+};
+
+export const useGetRestaurant = (
+  id: number,
+): HookReturnType<EnrichedRestaurant | null> => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [data, setData] = useState<EnrichedRestaurant | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getRestaurant(id);
+        setData(response);
+      } catch (error) {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   return {
     data,

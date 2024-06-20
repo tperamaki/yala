@@ -66,7 +66,7 @@ export const getRestaurant = async (id: number) => {
 
   return RestaurantSchema.extend({
     categories: z.array(CategorySchema),
-    averageReview: z.number(),
+    averageReview: z.number().optional(),
     reviewCount: z.number(),
   }).parseAsync(enhanceRestaurant(data));
 };
