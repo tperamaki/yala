@@ -20,7 +20,12 @@ const RootLayout = ({
   return (
     <html lang="en">
       <UserProvider>
-        <body className={inter.className}>
+        <body
+          className={
+            'bg-stone-100 text-black dark:bg-stone-900 dark:text-white ' +
+            inter.className
+          }
+        >
           <Header />
           <ToastProvider>{children}</ToastProvider>
         </body>

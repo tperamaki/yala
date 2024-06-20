@@ -10,7 +10,7 @@ const RestaurantCard = ({
 }: EnrichedRestaurant) => {
   return (
     <Link href={`/restaurant/${id}`}>
-      <div className="dark:color-white flex flex-col rounded-lg bg-white shadow-md hover:cursor-pointer dark:bg-black dark:shadow-neutral-600">
+      <div className="dark:color-white flex flex-col rounded-lg bg-stone-100 shadow-md shadow-stone-300 hover:cursor-pointer dark:bg-stone-800 dark:shadow-stone-700">
         <div className="relative h-40">
           <Image
             className="rounded-t-lg object-cover"
