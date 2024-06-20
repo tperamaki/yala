@@ -50,7 +50,16 @@ export const addReview = async <State>(
   }
 
   try {
-    await prisma.review.create({ data: validatedFields.data });
+    await prisma.review.upsert({
+      where: {
+        restaurantId_createdBy: {
+          restaurantId: payload.restaurant.connect.id,
+          createdBy: payload.createdBy,
+        },
+      },
+      update: { rating: validatedFields.data.rating },
+      create: { ...validatedFields.data },
+    });
     return { ...validatedFields.data, errors: undefined };
   } catch (error) {
     console.error(error);
