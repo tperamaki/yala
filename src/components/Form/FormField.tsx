@@ -59,7 +59,7 @@ const FormField = ({
         type={type}
         id={id}
         name={name}
-        className="appearance-none rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-gray-200 dark:border-slate-700 dark:text-slate-800 dark:focus:ring-slate-950"
+        className="appearance-none rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-gray-200 dark:border-slate-700 dark:text-slate-700 dark:focus:ring-slate-950"
         required={required}
       />
     </FormRow>

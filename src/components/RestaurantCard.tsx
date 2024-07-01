@@ -1,6 +1,12 @@
 import { EnrichedRestaurant } from '@/hooks/RestaurantHook';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+const variant = {
+  default: 'bg-stone-100 dark:bg-stone-900',
+  active: 'bg-red-100 dark:bg-red-900',
+};
 
 const RestaurantCard = ({
   id,
@@ -8,9 +14,17 @@ const RestaurantCard = ({
   averageReview,
   reviewCount,
 }: EnrichedRestaurant) => {
+  const pathname = usePathname();
   return (
     <Link href={`/restaurant/${id}`}>
-      <div className="dark:color-white flex flex-col rounded-lg bg-stone-100 shadow-md shadow-stone-300 hover:cursor-pointer dark:bg-stone-800 dark:shadow-stone-700">
+      <div
+        className={
+          (pathname === `/restaurant/${id}`
+            ? variant.active
+            : variant.default) +
+          ' dark:color-white flex flex-col rounded-lg border-2 border-stone-700 shadow-md shadow-stone-300 hover:cursor-pointer hover:border-red-100 hover:bg-red-100 dark:shadow-stone-700 hover:dark:border-red-900 hover:dark:bg-red-900'
+        }
+      >
         <div className="relative h-40">
           <Image
             className="rounded-t-lg object-cover"
