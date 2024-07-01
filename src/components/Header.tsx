@@ -5,7 +5,7 @@ const Header = () => {
     <header>
       <nav className="flex flex-row bg-red-100 p-4 dark:bg-red-900">
         <h1 className="basis-1/3 text-left text-xl">
-          <StyledLink href="/" variant="primary">
+          <StyledLink href="/restaurant" variant="primary">
             Yet Another Lunch App
           </StyledLink>
         </h1>
