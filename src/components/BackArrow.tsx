@@ -7,7 +7,7 @@ const BackArrow = ({ href }: { href: string }) => (
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="inline-block h-6 w-6"
+      className="inline-block h-6 w-6 rotate-180"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
