@@ -14,9 +14,9 @@ export type ButtonProps = {
 
 const variantClassNames: Record<ButtonVariant, string> = {
   primary:
-    'bg-red-900 border-red-900 bg-red-100 text-white dark:bg-red-100 dark:border-red-100 dark:text-red-900 hover:bg-red-700 hover:dark:bg-red-300 hover:border-red-700 hover:dark:border-red-300',
+    'bg-red-100 border-red-100 dark:bg-red-900 dark:border-red-900 hover:bg-red-300 hover:dark:bg-red-700 hover:border-red-300 hover:dark:border-red-700',
   secondary:
-    'border-red-900 text-red-900 bg-transparent dark:border-red-100 dark:text-red-100 hover:text-red-700 hover:dark:text-red-300 hover:border-red-700 hover:dark:border-red-300',
+    'border-red-100 bg-transparent dark:border-red-900 hover:bg-red-300 hover:border-red-300 hover:dark:bg-red-700 hover:dark:border-red-700',
 };
 
 const Button = ({

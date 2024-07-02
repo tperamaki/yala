@@ -8,6 +8,7 @@ import {
   RestaurantCreateInputSchema,
   RestaurantSchema,
   Review,
+  ReviewSchema,
 } from '@/types/generated';
 import { z } from 'zod';
 import { getSession } from '@auth0/nextjs-auth0';
@@ -25,6 +26,7 @@ const enhanceRestaurant = (
     reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
   return {
     ...rest,
+    reviews,
     averageReview: isNaN(averageReview) ? undefined : averageReview,
     reviewCount: reviews.length,
   };
@@ -42,6 +44,7 @@ export const getRestaurants = async () => {
     .array(
       RestaurantSchema.extend({
         categories: z.array(CategorySchema),
+        reviews: z.array(ReviewSchema),
         averageReview: z.number().optional(),
         reviewCount: z.number(),
       }),
@@ -66,6 +69,7 @@ export const getRestaurant = async (id: number) => {
 
   return RestaurantSchema.extend({
     categories: z.array(CategorySchema),
+    reviews: z.array(ReviewSchema),
     averageReview: z.number().optional(),
     reviewCount: z.number(),
   }).parseAsync(enhanceRestaurant(data));

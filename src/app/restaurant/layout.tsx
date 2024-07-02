@@ -8,7 +8,7 @@ const RestaurantsLayout = (props: { children: React.ReactNode }) => {
     <main className="flex flex-row">
       <RestaurantList />
       {pathname !== '/restaurant' ? (
-        <div className="ml-4 basis-1/3 bg-stone-300 dark:bg-stone-700">
+        <div className="ml-4 basis-1/3 bg-stone-300 px-1 dark:bg-stone-700">
           {props.children}
         </div>
       ) : null}
