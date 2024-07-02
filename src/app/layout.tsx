@@ -22,7 +22,7 @@ const RootLayout = ({
       <UserProvider>
         <body
           className={
-            'bg-stone-100 text-black dark:bg-stone-900 dark:text-white ' +
+            'bg-stone-100 text-stone-900 dark:bg-stone-900 dark:text-stone-100 ' +
             inter.className
           }
         >

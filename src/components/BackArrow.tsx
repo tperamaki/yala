@@ -1,10 +1,7 @@
 import Link from 'next/link';
 
 const BackArrow = ({ href }: { href: string }) => (
-  <Link
-    href={href}
-    className="mb-4 text-black hover:text-red-500 dark:text-white"
-  >
+  <Link href={href} className="mb-4 hover:text-red-300 hover:dark:text-red-700">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       className="inline-block h-6 w-6 rotate-180"

@@ -1,10 +1,11 @@
 import { getRestaurant, getRestaurants } from '@/services/restaurants';
 import { HookReturnType } from '@/types/general';
-import { Category, Restaurant } from '@prisma/client';
+import { Category, Restaurant, Review } from '@/types/generated';
 import { useEffect, useState } from 'react';
 
 export type EnrichedRestaurant = Restaurant & {
   categories: Category[];
+  reviews: Review[];
   averageReview?: number;
   reviewCount: number;
 };

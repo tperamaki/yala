@@ -22,7 +22,7 @@ const RestaurantCard = ({
           (pathname === `/restaurant/${id}`
             ? variant.active
             : variant.default) +
-          ' dark:color-white flex flex-col rounded-lg border-2 border-stone-700 shadow-md shadow-stone-300 hover:cursor-pointer hover:border-red-100 hover:bg-red-100 dark:shadow-stone-700 hover:dark:border-red-900 hover:dark:bg-red-900'
+          ' dark:color-white flex flex-col rounded-lg border-2 border-stone-300 shadow-md shadow-stone-300 hover:cursor-pointer hover:border-red-100 hover:bg-red-100 dark:border-stone-700 dark:shadow-stone-700 hover:dark:border-red-900 hover:dark:bg-red-900'
         }
       >
         <div className="relative h-40">
