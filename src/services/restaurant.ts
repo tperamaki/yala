@@ -15,6 +15,7 @@ import {
 import { z } from 'zod';
 import { getSession } from '@auth0/nextjs-auth0';
 import { getUserIdFromIdToken } from './utils';
+import { create } from 'domain';
 
 const prisma = new PrismaClient();
 
@@ -79,12 +80,13 @@ export const getRestaurant = async (id: number) => {
 
 const addCategories = async (
   categories: string[],
+  userId: string,
 ): Promise<
   { success: false; data: null } | { success: true; data: Category[] }
 > => {
   const validatedCategories = await z
     .array(CategoryCreateInputSchema)
-    .safeParseAsync(categories.map((name) => ({ name })));
+    .safeParseAsync(categories.map((name) => ({ name, createdBy: userId })));
 
   if (!validatedCategories.success) {
     return {
@@ -126,6 +128,7 @@ export const addRestaurant = async <State>(
 
   const addedCategories = await addCategories(
     (formData.get('categories') as string).split(','),
+    getUserIdFromIdToken(session.idToken),
   );
 
   const validatedFields =
