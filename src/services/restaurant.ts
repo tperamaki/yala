@@ -3,6 +3,7 @@ import 'server-only';
 
 import { PrismaClient } from '@prisma/client';
 import {
+  CategoriesOnRestaurantsSchema,
   Category,
   CategoryCreateInputSchema,
   CategorySchema,
@@ -38,15 +39,19 @@ const enhanceRestaurant = (
 export const getRestaurants = async () => {
   const data = await prisma.restaurant.findMany({
     include: {
-      categories: true,
+      categories: { include: { category: true } },
       reviews: true,
     },
   });
 
+  console.log(JSON.stringify(data));
+
   return z
     .array(
       RestaurantSchema.extend({
-        categories: z.array(CategorySchema),
+        categories: z.array(
+          CategoriesOnRestaurantsSchema.extend({ category: CategorySchema }),
+        ),
         reviews: z.array(ReviewSchema),
         averageReview: z.number().optional(),
         reviewCount: z.number(),
@@ -61,7 +66,7 @@ export const getRestaurant = async (id: number) => {
       id,
     },
     include: {
-      categories: true,
+      categories: { include: { category: true } },
       reviews: true,
     },
   });
@@ -71,7 +76,9 @@ export const getRestaurant = async (id: number) => {
   }
 
   return RestaurantSchema.extend({
-    categories: z.array(CategorySchema),
+    categories: z.array(
+      CategoriesOnRestaurantsSchema.extend({ category: CategorySchema }),
+    ),
     reviews: z.array(ReviewSchema),
     averageReview: z.number().optional(),
     reviewCount: z.number(),
