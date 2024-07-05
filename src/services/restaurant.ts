@@ -3,9 +3,11 @@ import 'server-only';
 
 import { PrismaClient } from '@prisma/client';
 import {
+  Category,
+  CategoryCreateInputSchema,
   CategorySchema,
   Restaurant,
-  RestaurantCreateInputSchema,
+  RestaurantCreateWithoutReviewsInputSchema,
   RestaurantSchema,
   Review,
   ReviewSchema,
@@ -75,6 +77,38 @@ export const getRestaurant = async (id: number) => {
   }).parseAsync(enhanceRestaurant(data));
 };
 
+const addCategories = async (
+  categories: string[],
+): Promise<
+  { success: false; data: null } | { success: true; data: Category[] }
+> => {
+  const validatedCategories = await z
+    .array(CategoryCreateInputSchema)
+    .safeParseAsync(categories.map((name) => ({ name })));
+
+  if (!validatedCategories.success) {
+    return {
+      success: false,
+      data: null,
+    };
+  }
+
+  const createdCategories = await Promise.all(
+    validatedCategories.data.map((category) =>
+      prisma.category.upsert({
+        where: { name: category.name },
+        update: {},
+        create: category,
+      }),
+    ),
+  );
+
+  return {
+    success: true,
+    data: createdCategories,
+  };
+};
+
 export const addRestaurant = async <State>(
   prevState: State,
   formData: FormData,
@@ -90,20 +124,38 @@ export const addRestaurant = async <State>(
     createdBy: getUserIdFromIdToken(session.idToken),
   };
 
-  const validatedFields = await RestaurantCreateInputSchema.refine(
-    (data) => data.name !== '',
-    { message: 'Name must not be empty', path: ['name'] },
-  ).safeParseAsync(payload);
+  const addedCategories = await addCategories(
+    (formData.get('categories') as string).split(','),
+  );
 
-  if (!validatedFields.success) {
+  const validatedFields =
+    await RestaurantCreateWithoutReviewsInputSchema.refine(
+      (data) => data.name !== '',
+      { message: 'Name must not be empty', path: ['name'] },
+    ).safeParseAsync(payload);
+
+  if (!validatedFields.success || !addedCategories.success) {
     return {
       ...prevState,
-      errors: validatedFields.error.flatten().fieldErrors,
+      errors: validatedFields.error?.flatten().fieldErrors ?? {
+        categories: ['Invalid categories'],
+      },
     };
   }
 
   try {
-    await prisma.restaurant.create({ data: validatedFields.data });
+    const createdRestaurant = await prisma.restaurant.create({
+      data: {
+        name: validatedFields.data.name,
+        createdBy: validatedFields.data.createdBy,
+      },
+    });
+    await prisma.categoriesOnRestaurants.createMany({
+      data: addedCategories.data.map((category) => ({
+        categoryId: category.id,
+        restaurantId: createdRestaurant.id,
+      })),
+    });
     return { ...validatedFields.data, errors: undefined };
   } catch (error) {
     console.error(error);

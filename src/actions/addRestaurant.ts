@@ -1,4 +1,4 @@
-import { addRestaurant } from '@/services/restaurants';
+import { addRestaurant } from '@/services/restaurant';
 import { toast } from 'react-toastify';
 import { redirect } from 'next/navigation';
 import { RestaurantFormState } from '@/components/Form/AddRestaurantForm';
