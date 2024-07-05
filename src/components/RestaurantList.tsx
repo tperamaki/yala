@@ -7,7 +7,7 @@ const RestaurantList = () => {
   const { data, isLoading, isError } = useGetRestaurants();
   const [search, setSearch] = useState('');
   const fuse = new Fuse(data, {
-    keys: ['name'],
+    keys: ['name', 'categories.category.name'],
     threshold: 0.4,
   });
 
