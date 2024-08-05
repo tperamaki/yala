@@ -1,0 +1,11 @@
+{
+  "apiFolder": "src/app/api",
+  "schemaFolders": ["src/types/generated"],
+  "definition": {
+    "openapi": "3.0.0",
+    "info": {
+      "title": "YetAnotherLunchApp API",
+      "version": "1.0.0"
+    }
+  }
+}
