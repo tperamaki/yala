@@ -8,7 +8,6 @@ test('page renders correctly', async ({ page }) => {
   ).toBeVisible();
 
   await expect(page.getByLabel('Name')).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Clear' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Submit' })).toBeVisible();
 });
 

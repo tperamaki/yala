@@ -1,4 +1,4 @@
-import { ClearButton, SubmitButton } from './Buttons';
+import { SubmitButton } from './Buttons';
 
 type FormProps = {
   action: (payload: FormData) => void;
@@ -16,7 +16,6 @@ const Form = ({ action, children, label }: FormProps) => {
       <h2 className="text-center text-xl">{label}</h2>
       {children}
       <div className="flex flex-row justify-end gap-4">
-        <ClearButton />
         <SubmitButton />
       </div>
     </form>

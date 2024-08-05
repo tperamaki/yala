@@ -1,7 +1,7 @@
 'use server';
 import 'server-only';
 
-import { PrismaClient } from '@prisma/client';
+import prisma from './client';
 import {
   ReviewCreateInputSchema,
   ReviewFindManyArgsSchema,
@@ -10,8 +10,6 @@ import {
 import { z } from 'zod';
 import { getSession } from '@auth0/nextjs-auth0';
 import { getUserIdFromIdToken } from './utils';
-
-const prisma = new PrismaClient();
 
 export const getReviews = async (restaurantId: number) => {
   const findManyArgs = ReviewFindManyArgsSchema.parse({

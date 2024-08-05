@@ -24,7 +24,7 @@ type SelectFieldProps = {
   label: FormFieldProps['label'];
 } & SelectProps;
 
-const FormRow = ({ error, label, name, children }: FormRowProps) => {
+export const FormRow = ({ error, label, name, children }: FormRowProps) => {
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={name}>{label}</label>

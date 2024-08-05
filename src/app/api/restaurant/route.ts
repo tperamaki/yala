@@ -1,4 +1,4 @@
-import { getRestaurants } from '@/services/restaurants';
+import { getRestaurants } from '@/services/restaurant';
 import { NextResponse } from 'next/server';
 
 /**

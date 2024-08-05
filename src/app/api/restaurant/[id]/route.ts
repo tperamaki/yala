@@ -1,4 +1,4 @@
-import { getRestaurant } from '@/services/restaurants';
+import { getRestaurant } from '@/services/restaurant';
 import { NextResponse } from 'next/server';
 
 type Params = {
