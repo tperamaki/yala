@@ -44,7 +44,6 @@ export const getRestaurants = async () => {
     },
   });
 
-  console.log(JSON.stringify(data));
 
   return z
     .array(
