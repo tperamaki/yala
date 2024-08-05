@@ -1,0 +1,102 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "YetAnotherLunchApp API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/auth": {
+      "get": {
+        "description": "Handles Auth0 authentication stuff"
+      }
+    },
+    "/api/restaurant/{id}/review/add": {
+      "post": {
+        "description": "Adds or updates a review for a restaurant by ID by the user",
+        "responses": {
+          "200": {
+            "description": "Returns somethings"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "rating": {
+                    "type": "integer",
+                    "description": "Rating of the review",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/restaurant/{id}/review": {
+      "get": {
+        "description": "Returns an array of reviews for a restaurant by ID",
+        "responses": {
+          "200": {
+            "description": "Returns an array of reviews for a restaurant by ID or empty array if no reviews or restaurant is missing"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/restaurant/{id}": {
+      "get": {
+        "description": "Returns a restaurant by ID",
+        "responses": {
+          "200": {
+            "description": "Returns a restaurant or null"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/restaurant": {
+      "get": {
+        "description": "Returns a list of restaurants",
+        "responses": {
+          "200": {
+            "description": "A list of restaurants"
+          }
+        }
+      }
+    }
+  },
+  "components": {},
+  "tags": []
+}

@@ -25,6 +25,12 @@ Run project locally with `npm run dev`
 
 [Datamodel](docs/datamodel.md)
 
+## Swagger
+
+Swagger is available at `/swagger-ui`.
+
+Swagger documentation is updated in post-install, so run `npm install` to update the documentation.
+
 ## E2E tests with Playwright
 
 Playwright end to end tests are run on pull requests.
