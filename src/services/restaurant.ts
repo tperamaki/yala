@@ -1,7 +1,7 @@
 'use server';
 import 'server-only';
 
-import { PrismaClient } from '@prisma/client';
+import prisma from './client';
 import {
   CategoriesOnRestaurantsSchema,
   Category,
@@ -16,9 +16,6 @@ import {
 import { z } from 'zod';
 import { getSession } from '@auth0/nextjs-auth0';
 import { getUserIdFromIdToken } from './utils';
-import { create } from 'domain';
-
-const prisma = new PrismaClient();
 
 const enhanceRestaurant = (
   restaurant: Restaurant & {
@@ -43,7 +40,6 @@ export const getRestaurants = async () => {
       reviews: true,
     },
   });
-
 
   return z
     .array(
