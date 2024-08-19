@@ -2,7 +2,7 @@
 import Form from './Form';
 import { z } from 'zod';
 import { ReviewCreateInputSchema } from '@/types/generated';
-import { NumberField, SelectField } from './FormField';
+import { NumberField, TextField, SelectField } from './FormField';
 import { useFormState } from 'react-dom';
 import { addReviewAction } from '@/actions/addReview';
 import { SelectProps } from '../Select';
@@ -22,6 +22,7 @@ const initialState: AddReviewFormState = {
     },
   },
   rating: 0,
+  comment: ""
 };
 
 const AddReviewForm = (props: { restaurantId: number }) => {
@@ -35,6 +36,11 @@ const AddReviewForm = (props: { restaurantId: number }) => {
         id="rating"
         label="Rating"
         name="rating"
+      />
+      <TextField
+        id="comment"
+        label="Comment"
+        name="comment"
       />
     </Form>
   );
