@@ -21,6 +21,7 @@ erDiagram
     Int rating 
     DateTime createdAt 
     String createdBy "🗝️"
+    String comment 
     }
   
 
