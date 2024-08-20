@@ -35,6 +35,7 @@ export const addReview = async <State>(
       connect: { id: parseInt(String(formData.get('restaurantId')), 10) },
     },
     rating: parseInt(String(formData.get('rating')), 10),
+    comment: String(formData.get('comment')),
     createdBy: getUserIdFromIdToken(session.idToken),
   };
 
@@ -55,7 +56,10 @@ export const addReview = async <State>(
           createdBy: payload.createdBy,
         },
       },
-      update: { rating: validatedFields.data.rating },
+      update: {
+        rating: validatedFields.data.rating,
+        comment: validatedFields.data.comment,
+      },
       create: { ...validatedFields.data },
     });
     return { ...validatedFields.data, errors: undefined };
