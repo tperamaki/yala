@@ -58,7 +58,7 @@ export const addReview = async <State>(
       },
       update: {
         rating: validatedFields.data.rating,
-        comment: validatedFields.data.comment
+        comment: validatedFields.data.comment,
       },
       create: { ...validatedFields.data },
     });

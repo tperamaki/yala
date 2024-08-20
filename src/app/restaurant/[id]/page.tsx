@@ -39,7 +39,7 @@ const RestaurantsPage = (props: { params: { id: string } }) => {
           {data.reviews.map((review) => (
             <div
               key={review.createdBy}
-              className="flex flex-col p-4 mb-4 rounded-lg bg-stone-100 dark:bg-stone-800"
+              className="mb-4 flex flex-col rounded-lg bg-stone-100 p-4 dark:bg-stone-800"
             >
               <div className="flex items-center justify-between">
                 <p className="font-semibold">Rating: {review.rating}</p>
@@ -47,7 +47,9 @@ const RestaurantsPage = (props: { params: { id: string } }) => {
                   {new Date(review.createdAt).toLocaleDateString()}
                 </p>
               </div>
-              <p className="mt-2 text-stone-900 dark:text-stone-100">{review.comment}</p>
+              <p className="mt-2 text-stone-900 dark:text-stone-100">
+                {review.comment}
+              </p>
               {user.sub === review.createdBy && (
                 <p className="mt-2 text-xs text-red-700 dark:text-red-300">
                   Your review
