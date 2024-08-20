@@ -41,7 +41,8 @@ model Review {
   rating        Int
   createdAt     DateTime     @default(now())
   createdBy     String
-
+  comment       String       @default("")
+  
   @@id([restaurantId, createdBy])
 }
 

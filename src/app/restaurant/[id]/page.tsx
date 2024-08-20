@@ -30,7 +30,7 @@ const RestaurantsPage = (props: { params: { id: string } }) => {
           <RestaurantCard {...data} />
           <Link
             href={`/restaurant/${restaurantId}/review`}
-            className="my-4 rounded bg-red-100 px-4 py-2 font-bold hover:bg-red-300 dark:bg-red-900 hover:dark:bg-red-700"
+            className="my-4 rounded-lg bg-red-100 px-4 py-2 font-bold hover:bg-red-300 dark:bg-red-900 hover:dark:bg-red-700"
           >
             {data.reviews.some((review) => review.createdBy === user.sub)
               ? 'Update your review'
@@ -39,17 +39,20 @@ const RestaurantsPage = (props: { params: { id: string } }) => {
           {data.reviews.map((review) => (
             <div
               key={review.createdBy}
-              className="flex flex-row justify-between p-2 even:bg-stone-400 dark:even:bg-stone-600"
+              className="flex flex-col p-4 mb-4 rounded-lg bg-stone-100 dark:bg-stone-800"
             >
-              <p>Rating: {review.rating}</p>
-              <p className="flex flex-col text-xs text-stone-700 dark:text-stone-300">
-                {new Date(review.createdAt).toLocaleDateString()}
-                {user.sub === review.createdBy ? (
-                  <span className="text-red-700 dark:text-red-300">
-                    Your review
-                  </span>
-                ) : null}
-              </p>
+              <div className="flex items-center justify-between">
+                <p className="font-semibold">Rating: {review.rating}</p>
+                <p className="text-xs text-stone-700 dark:text-stone-300">
+                  {new Date(review.createdAt).toLocaleDateString()}
+                </p>
+              </div>
+              <p className="mt-2 text-stone-900 dark:text-stone-100">{review.comment}</p>
+              {user.sub === review.createdBy && (
+                <p className="mt-2 text-xs text-red-700 dark:text-red-300">
+                  Your review
+                </p>
+              )}
             </div>
           ))}
         </>
