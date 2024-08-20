@@ -47,9 +47,11 @@ const RestaurantsPage = (props: { params: { id: string } }) => {
                   {new Date(review.createdAt).toLocaleDateString()}
                 </p>
               </div>
-              <p className="mt-2 text-stone-900 dark:text-stone-100">
-                {review.comment}
-              </p>
+              {review.comment?.length > 0 ? (
+                <p className="mt-2 text-stone-900 dark:text-stone-100">
+                  {review.comment}
+                </p>
+              ) : null}
               {user.sub === review.createdBy && (
                 <p className="mt-2 text-xs text-red-700 dark:text-red-300">
                   Your review
