@@ -42,7 +42,7 @@ const RestaurantsPage = (props: { params: { id: string } }) => {
               className="mb-4 flex flex-col rounded-lg bg-stone-100 p-4 dark:bg-stone-800"
             >
               <div className="flex items-center justify-between">
-                <p className="font-semibold">Rating: {review.rating}</p>
+                <p className="font-semibold">RATING: {review.rating}</p>
                 <p className="text-xs text-stone-700 dark:text-stone-300">
                   {new Date(review.createdAt).toLocaleDateString()}
                 </p>
