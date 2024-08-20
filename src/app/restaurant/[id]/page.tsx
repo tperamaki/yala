@@ -41,7 +41,7 @@ const RestaurantsPage = (props: { params: { id: string } }) => {
               key={review.createdBy}
               className="flex flex-row justify-between p-2 even:bg-stone-400 dark:even:bg-stone-600"
             >
-              <p>Rating: {review.rating}</p>
+              <p>RATING: {review.rating}</p>
               <p className="flex flex-col text-xs text-stone-700 dark:text-stone-300">
                 {new Date(review.createdAt).toLocaleDateString()}
                 {user.sub === review.createdBy ? (
