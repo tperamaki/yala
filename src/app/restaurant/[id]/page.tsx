@@ -52,6 +52,11 @@ const RestaurantsPage = (props: { params: { id: string } }) => {
                   {review.comment}
                 </p>
               ) : null}
+              {review.imageId?.length > 0 ? (
+                <p className="mt-2 text-stone-900 dark:text-stone-100">
+                  IMAGE ID: {review.imageId}
+                </p>
+              ) : null}
               {user.sub === review.createdBy && (
                 <p className="mt-2 text-xs text-red-700 dark:text-red-300">
                   Your review

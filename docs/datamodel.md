@@ -22,6 +22,7 @@ erDiagram
     DateTime createdAt 
     String createdBy "🗝️"
     String comment 
+    String imageId 
     }
   
 

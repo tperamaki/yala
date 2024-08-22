@@ -36,6 +36,7 @@ export const addReview = async <State>(
     },
     rating: parseInt(String(formData.get('rating')), 10),
     comment: String(formData.get('comment')),
+    imageId: String(formData.get('imageId')),
     createdBy: getUserIdFromIdToken(session.idToken),
   };
 
@@ -59,6 +60,7 @@ export const addReview = async <State>(
       update: {
         rating: validatedFields.data.rating,
         comment: validatedFields.data.comment,
+        imageId: validatedFields.data.imageId,
       },
       create: { ...validatedFields.data },
     });

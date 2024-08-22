@@ -23,6 +23,7 @@ const initialState: AddReviewFormState = {
   },
   rating: 0,
   comment: '',
+  imageId: '',
 };
 
 const AddReviewForm = (props: { restaurantId: number }) => {
@@ -38,6 +39,7 @@ const AddReviewForm = (props: { restaurantId: number }) => {
         name="rating"
       />
       <TextField id="comment" label="Comment" name="comment" />
+      <TextField id="imageId" label="Image ID" name="imageId" />
     </Form>
   );
 };
