@@ -2,6 +2,7 @@
 
 import BackArrow from '@/components/BackArrow';
 import RestaurantCard from '@/components/RestaurantCard';
+import ReviewCard from '@/components/ReviewCard';
 import { useGetRestaurant } from '@/hooks/RestaurantHook';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import Link from 'next/link';
@@ -36,33 +37,12 @@ const RestaurantsPage = (props: { params: { id: string } }) => {
               ? 'Update your review'
               : 'Add a review'}
           </Link>
-          {data.reviews.map((review) => (
-            <div
-              key={review.createdBy}
-              className="mb-4 flex flex-col rounded-lg bg-stone-100 p-4 dark:bg-stone-800"
-            >
-              <div className="flex items-center justify-between">
-                <p className="font-semibold">RATING: {review.rating}</p>
-                <p className="text-xs text-stone-700 dark:text-stone-300">
-                  {new Date(review.createdAt).toLocaleDateString()}
-                </p>
-              </div>
-              {review.comment?.length > 0 ? (
-                <p className="mt-2 text-stone-900 dark:text-stone-100">
-                  {review.comment}
-                </p>
-              ) : null}
-              {review.imageId?.length > 0 ? (
-                <p className="mt-2 text-stone-900 dark:text-stone-100">
-                  IMAGE ID: {review.imageId}
-                </p>
-              ) : null}
-              {user.sub === review.createdBy && (
-                <p className="mt-2 text-xs text-red-700 dark:text-red-300">
-                  Your review
-                </p>
-              )}
-            </div>
+          {data.reviews.map((review) => ( 
+              <ReviewCard
+                key={review.createdBy}
+                review={review}
+                isOwnReview={user.sub === review.createdBy}>
+              </ReviewCard>
           ))}
         </>
       )}

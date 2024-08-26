@@ -2,10 +2,10 @@
 import Form from './Form';
 import { z } from 'zod';
 import { ReviewCreateInputSchema } from '@/types/generated';
-import { NumberField, TextField, SelectField } from './FormField';
+import { NumberField, TextField, ImageField } from './FormField';
 import { useFormState } from 'react-dom';
 import { addReviewAction } from '@/actions/addReview';
-import { SelectProps } from '../Select';
+import { getImageUrl, setImage } from '@/services/image';
 
 type InputType = Omit<z.infer<typeof ReviewCreateInputSchema>, 'createdBy'>;
 
@@ -39,7 +39,14 @@ const AddReviewForm = (props: { restaurantId: number }) => {
         name="rating"
       />
       <TextField id="comment" label="Comment" name="comment" />
-      <TextField id="imageId" label="Image ID" name="imageId" />
+      <ImageField
+        error={state.errors?.imageId?.at(0)}
+        id="imageId"
+        label="Image ID"
+        name="imageId"
+        getImageUrl={getImageUrl}
+        setImage={setImage}
+      />
     </Form>
   );
 };
