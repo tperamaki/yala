@@ -93,15 +93,11 @@ export const ImageField = ({
   id,
   label,
   name,
-  getImageUrl,
-  setImage
 }: ImageFieldProps) => (
   <FormRow error={error} label={label} name={name}>
     <ImagePicker
       id={id}
       name={name}
-      getImageUrl={getImageUrl}
-      setImage={setImage}
     />
   </FormRow>
 );

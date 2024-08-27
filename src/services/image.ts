@@ -1,30 +1,35 @@
+import { NextRequest } from 'next/server';
+import { getSession } from '@auth0/nextjs-auth0';
+import fs from "node:fs/promises";
 import { nanoid } from 'nanoid'
 
-const map = new Map();
+export const saveImage = async (request: NextRequest) => {
 
-export const getImageUrl = async (id: string) => {
-  return map.get(id)
-};
+  const session = await getSession();
+  if (!session?.idToken) {
+    throw new Error('Unauthorized');
+  }
 
-export const setImage = async (file: File) => {
+  const formData = await request.formData();
+  const body = Object.fromEntries(formData);
+  const file = (body.file as Blob) || null;
 
-  return new Promise<{id: string; url: string;}>((resolve, reject) => {
+  if(file !== null) {
+    const filename = (body.file as File).name;
+    const extension = filename.slice(filename.lastIndexOf("."));
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const id = nanoid();
 
-    const reader = new FileReader();
-
-    reader.onabort = () => {
-      reject('File reading was aborted');
+    await fs.mkdir('./public/uploads/', { recursive: true });
+    await fs.writeFile(`./public/uploads/img-${id}${extension}`, buffer);
+    
+    return {
+      success: true,
+      url: `/uploads/img-${id}${extension}`
     };
-    reader.onerror = () => {
-      reject('File reading has failed');
-    };
-    reader.onload = () => {
-
-      const id = nanoid();
-      const url = reader.result as string;
-      map.set( id, url );
-      resolve( { id, url } );
-    };
-    reader.readAsDataURL(file);
-  });
+  }
+  return {
+    success: false,
+    url: null
+  };
 };

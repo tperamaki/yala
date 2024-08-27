@@ -1,11 +1,16 @@
-import { useState, useEffect } from 'react';
+//import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Review } from '@/types/generated';
-import { getImageUrl } from '@/services/image';
+
+export type ReviewCardProps = {
+  review: Review;
+  isOwnReview: boolean;
+};
 
 const ReviewCard = ({
-  review, isOwnReview
-}: {review: Review, isOwnReview: boolean } ) => {
+  review,
+  isOwnReview
+}: ReviewCardProps) => {
 
   const {
     rating,
@@ -13,23 +18,6 @@ const ReviewCard = ({
     comment,
     imageId,
   } = review;
-
-  const [imageUrl, setImageUrl] = useState('/placeholder.jpg');
-
-  useEffect(() => {
-    if( imageId && imageId.length > 0 ) {
-
-      const fetchData = async () => {
-        try {
-          const url = await getImageUrl(imageId);
-          setImageUrl(url);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-      fetchData();
-    }
-  }, [imageId]);
 
   return (
     <div className="mb-4 flex flex-col rounded-lg bg-stone-100 p-4 dark:bg-stone-800">
@@ -49,11 +37,11 @@ const ReviewCard = ({
           Your review
         </p>
       ) }
-      {imageUrl?.length > 0 ? (
+      {imageId?.length > 0 ? (
         <div className="relative h-40">
           <Image
             className="rounded-t-lg object-cover"
-            src={imageUrl}
+            src={imageId}
             alt="placeholder"
             fill
           />

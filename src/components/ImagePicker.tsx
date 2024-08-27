@@ -7,20 +7,15 @@ export type ImagePickerProps = {
   disabled?: boolean;
   id: string;
   name: string;
-  getImageUrl?: (id: string) => Promise<string>;
-  setImage?: (file: File) => Promise<{id: string, url: string}>;
 };
 
 const ImagePickerComponent = ({
   disabled = false,
   id,
   name,
-  getImageUrl,
-  setImage,
 }: ImagePickerProps) => {
 
-  const [imageSrc, setImageSrc] = useState<string|null>(null);
-  const [imageId, setImageId] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>("");
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
 
@@ -30,14 +25,19 @@ const ImagePickerComponent = ({
   
     const saveImage = async () => {
       try {
+        const formData = new FormData();
+        formData.append('file', file);
+    
+        const response = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        });
+        
+        const data = await response.json();
+        setImageUrl(data.url);
 
-        if(typeof setImage !== 'undefined') {
-          const result = await setImage(file);
-          setImageId(result.id);
-          setImageSrc(result.url);
-        }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error uploading file:', error);
       }
     };
     saveImage();
@@ -53,17 +53,24 @@ const ImagePickerComponent = ({
         <p className="mb-2 text-center">Drag & drop image file here, or click to select file</p>
       </div>
 
-      { imageSrc && (
+      { imageUrl && (
           <div className="relative h-40">
           <Image
             className="rounded-t-lg object-cover"
-            src={imageSrc}
+            src={imageUrl}
             alt="placeholder"
             fill
           />
         </div>
       )}
-      <input type="text" id={id} name={name} value={imageId} readOnly />
+      <input
+        hidden
+        type="text"
+        id={id}
+        name={name}
+        value={imageUrl}
+        readOnly
+      />
     </>
   );
 }; 

@@ -5,7 +5,6 @@ import { ReviewCreateInputSchema } from '@/types/generated';
 import { NumberField, TextField, ImageField } from './FormField';
 import { useFormState } from 'react-dom';
 import { addReviewAction } from '@/actions/addReview';
-import { getImageUrl, setImage } from '@/services/image';
 
 type InputType = Omit<z.infer<typeof ReviewCreateInputSchema>, 'createdBy'>;
 
@@ -44,8 +43,6 @@ const AddReviewForm = (props: { restaurantId: number }) => {
         id="imageId"
         label="Image ID"
         name="imageId"
-        getImageUrl={getImageUrl}
-        setImage={setImage}
       />
     </Form>
   );
