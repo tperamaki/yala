@@ -47,13 +47,15 @@ const ImagePickerComponent = ({
 
   return (
     <>
-      <div {...getRootProps()} className="border-2 border-dashed border-gray-300 rounded-md p-2 flex flex-col items-center justify-center text-gray-600 hover:bg-gray-50 border-gray-400 cursor-pointer transition duration-300">
-        <input {...getInputProps()} />
-        <p className="mb-2 text-center">Drag & drop image file here, or click to select file</p>
-      </div>
+      { !imageUrl && (
+        <div {...getRootProps()} className="h-24 border-2 border-dashed border-gray-300 rounded-md p-2 flex flex-col items-center justify-center text-gray-600 hover:bg-gray-50 border-gray-400 cursor-pointer transition duration-300">
+          <input {...getInputProps()} />
+          <p className="mb-2 text-center">Drag & drop image file here, or click to select file</p>
+        </div>
+      )}
 
       { imageUrl && (
-          <div className="relative h-40">
+          <div className="relative h-24">
           <Image
             className="rounded-t-lg object-cover"
             src={imageUrl}

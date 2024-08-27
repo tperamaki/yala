@@ -53,8 +53,8 @@ const AddReviewForm = (props: { restaurantId: number }) => {
       <ImageField
         error={state.errors?.imageId?.at(0)}
         id="imageId"
-        label="Image ID"
         name="imageId"
+        label=""
       />
     </Form>
   );
