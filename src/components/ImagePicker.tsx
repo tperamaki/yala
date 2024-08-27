@@ -19,32 +19,31 @@ const ImagePickerComponent = ({
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
 
-    // TODO: Accept only image files.
+    if(acceptedFiles.length > 0) {
+      const file = acceptedFiles[0];
+      const saveImage = async () => {
+        try {
+          const formData = new FormData();
+          formData.append('file', file);
+      
+          const response = await fetch('/api/upload', {
+            method: 'POST',
+            body: formData,
+          });
+          
+          const data = await response.json();
+          setImageUrl(data.url);
 
-    const file = acceptedFiles[0];
-  
-    const saveImage = async () => {
-      try {
-        const formData = new FormData();
-        formData.append('file', file);
-    
-        const response = await fetch('/api/upload', {
-          method: 'POST',
-          body: formData,
-        });
-        
-        const data = await response.json();
-        setImageUrl(data.url);
-
-      } catch (error) {
-        console.error('Error uploading file:', error);
-      }
-    };
-    saveImage();
+        } catch (error) {
+          console.error('Error uploading file:', error);
+        }
+      };
+      saveImage();
+    }
 
   }, []);
 
-  const {getRootProps, getInputProps} = useDropzone({onDrop})
+  const {getRootProps, getInputProps} = useDropzone({onDrop, accept: {'image/*': []}});
 
   return (
     <>
@@ -63,6 +62,7 @@ const ImagePickerComponent = ({
           />
         </div>
       )}
+
       <input
         hidden
         type="text"
