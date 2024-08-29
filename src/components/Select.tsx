@@ -1,6 +1,10 @@
 import { Suspense, use } from 'react';
 
-export type Option = { key: number | string; label: string; value: number | string };
+export type Option = {
+  key: number | string;
+  label: string;
+  value: number | string;
+};
 
 export type SelectProps = {
   disabled?: boolean;

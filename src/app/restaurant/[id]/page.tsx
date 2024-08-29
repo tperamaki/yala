@@ -37,12 +37,12 @@ const RestaurantsPage = (props: { params: { id: string } }) => {
               ? 'Update your review'
               : 'Add a review'}
           </Link>
-          {data.reviews.map((review) => ( 
-              <ReviewCard
-                key={review.createdBy}
-                review={review}
-                isOwnReview={user.sub === review.createdBy}>
-              </ReviewCard>
+          {data.reviews.map((review) => (
+            <ReviewCard
+              key={review.createdBy}
+              review={review}
+              isOwnReview={user.sub === review.createdBy}
+            ></ReviewCard>
           ))}
         </>
       )}

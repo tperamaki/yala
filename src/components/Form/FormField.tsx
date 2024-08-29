@@ -88,17 +88,9 @@ export const SelectField = ({
   </FormRow>
 );
 
-export const ImageField = ({
-  error,
-  id,
-  label,
-  name,
-}: ImageFieldProps) => (
+export const ImageField = ({ error, id, label, name }: ImageFieldProps) => (
   <FormRow error={error} label={label} name={name}>
-    <ImagePicker
-      id={id}
-      name={name}
-    />
+    <ImagePicker id={id} name={name} />
   </FormRow>
 );
 

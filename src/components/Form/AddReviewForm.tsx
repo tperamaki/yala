@@ -27,11 +27,11 @@ const initialState: AddReviewFormState = {
 };
 
 const options: Option[] = [
-  { key: 1, label: "⭐", value: 1 },
-  { key: 2, label: "⭐⭐", value: 2 },
-  { key: 3, label: "⭐⭐⭐", value: 3 },
-  { key: 4, label: "⭐⭐⭐⭐", value: 4 },
-  { key: 5, label: "⭐⭐⭐⭐⭐", value: 5 }
+  { key: 1, label: '⭐', value: 1 },
+  { key: 2, label: '⭐⭐', value: 2 },
+  { key: 3, label: '⭐⭐⭐', value: 3 },
+  { key: 4, label: '⭐⭐⭐⭐', value: 4 },
+  { key: 5, label: '⭐⭐⭐⭐⭐', value: 5 },
 ];
 
 const AddReviewForm = (props: { restaurantId: number }) => {
