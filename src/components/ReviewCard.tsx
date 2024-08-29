@@ -35,7 +35,7 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
       {comment?.length > 0 ? (
         <p className="mt-2 text-stone-900 dark:text-stone-100">{comment}</p>
       ) : null}
-      {isOwnReview && false && (
+      {isOwnReview && (
         <p className="mt-2 text-xs text-red-700 dark:text-red-300">
           Your review
         </p>
