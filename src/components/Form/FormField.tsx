@@ -1,7 +1,8 @@
 import type { HTMLInputTypeAttribute } from 'react';
-
 import Select from '../Select';
 import type { SelectProps } from '../Select';
+import ImagePicker from '../ImagePicker';
+import type { ImagePickerProps } from '../ImagePicker';
 
 type FormRowProps = {
   error?: string;
@@ -23,6 +24,11 @@ type SelectFieldProps = {
   error: FormFieldProps['error'];
   label: FormFieldProps['label'];
 } & SelectProps;
+
+type ImageFieldProps = {
+  error: FormFieldProps['error'];
+  label: FormFieldProps['label'];
+} & ImagePickerProps;
 
 export const FormRow = ({ error, label, name, children }: FormRowProps) => {
   return (
@@ -79,6 +85,12 @@ export const SelectField = ({
 }: SelectFieldProps) => (
   <FormRow error={error} label={label} name={name}>
     <Select id={id} name={name} options={options} />
+  </FormRow>
+);
+
+export const ImageField = ({ error, id, label, name }: ImageFieldProps) => (
+  <FormRow error={error} label={label} name={name}>
+    <ImagePicker id={id} name={name} />
   </FormRow>
 );
 

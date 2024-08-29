@@ -50,3 +50,6 @@ next-env.d.ts
 
 # ignore generated zod types, they are re-generated in post install
 src/types/generated
+
+# uploaded files
+/public/uploads

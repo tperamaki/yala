@@ -42,6 +42,7 @@ model Review {
   createdAt     DateTime     @default(now())
   createdBy     String
   comment       String       @default("")
+  imageId       String       @default("")
   
   @@id([restaurantId, createdBy])
 }
