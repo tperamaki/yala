@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "postinstall": "prisma generate && prisma migrate dev && next-swagger-doc-cli next-swagger-doc.json",
-    "dev": "next dev",
+    "database-prepare": "prisma generate && prisma migrate dev && next-swagger-doc-cli next-swagger-doc.json",
+    "dev": "npm run database-prepare && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

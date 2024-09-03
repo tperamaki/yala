@@ -18,7 +18,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN npm run build
+RUN npm run database-prepare && npm run build
 
 FROM base as runner
 WORKDIR /app
