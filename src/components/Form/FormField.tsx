@@ -18,6 +18,7 @@ type FormFieldProps = {
   name: string;
   type: HTMLInputTypeAttribute;
   required?: boolean;
+  defaultValue?: number | string;
 };
 
 type SelectFieldProps = {
@@ -56,6 +57,7 @@ const FormField = ({
   name,
   type,
   required,
+  defaultValue,
 }: FormFieldProps) => {
   return (
     <FormRow error={error} label={label} name={name}>
@@ -67,6 +69,7 @@ const FormField = ({
         name={name}
         className="appearance-none rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-gray-200 dark:border-slate-700 dark:text-slate-700 dark:focus:ring-slate-950"
         required={required}
+        defaultValue={defaultValue}
       />
     </FormRow>
   );
@@ -82,15 +85,22 @@ export const SelectField = ({
   label,
   name,
   options,
+  defaultValue,
 }: SelectFieldProps) => (
   <FormRow error={error} label={label} name={name}>
-    <Select id={id} name={name} options={options} />
+    <Select id={id} name={name} options={options} defaultValue={defaultValue} />
   </FormRow>
 );
 
-export const ImageField = ({ error, id, label, name }: ImageFieldProps) => (
+export const ImageField = ({
+  error,
+  id,
+  label,
+  name,
+  defaultValue,
+}: ImageFieldProps) => (
   <FormRow error={error} label={label} name={name}>
-    <ImagePicker id={id} name={name} />
+    <ImagePicker id={id} name={name} defaultValue={defaultValue} />
   </FormRow>
 );
 

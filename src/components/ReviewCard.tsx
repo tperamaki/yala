@@ -22,7 +22,7 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
       </div>
 
       {imageId?.length > 0 && (
-        <div className="relative h-24">
+        <div className="relative h-32">
           <Image
             className="object-cover"
             src={imageId}

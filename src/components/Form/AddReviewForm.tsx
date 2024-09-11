@@ -1,8 +1,8 @@
 'use client';
 import Form from './Form';
 import { z } from 'zod';
-import { ReviewCreateInputSchema } from '@/types/generated';
-import { NumberField, TextField, ImageField, SelectField } from './FormField';
+import { ReviewCreateInputSchema, Review } from '@/types/generated';
+import { TextField, ImageField, SelectField } from './FormField';
 import { useFormState } from 'react-dom';
 import { addReviewAction } from '@/actions/addReview';
 import { Option } from '../Select';
@@ -34,8 +34,12 @@ const options: Option[] = [
   { key: 5, label: '⭐⭐⭐⭐⭐', value: 5 },
 ];
 
-const AddReviewForm = (props: { restaurantId: number }) => {
+const AddReviewForm = (props: {
+  restaurantId: number;
+  review: Review | null | undefined;
+}) => {
   const [state, formAction] = useFormState(addReviewAction, initialState);
+  const { rating = '', comment = '', imageId = '' } = props.review || {};
 
   return (
     <Form action={formAction} label="Add review">
@@ -47,14 +51,20 @@ const AddReviewForm = (props: { restaurantId: number }) => {
         label="Rating"
         name="rating"
         options={options}
+        defaultValue={rating}
       />
-
-      <TextField id="comment" label="Comment" name="comment" />
+      <TextField
+        id="comment"
+        label="Comment"
+        name="comment"
+        defaultValue={comment}
+      />
       <ImageField
         error={state.errors?.imageId?.at(0)}
         id="imageId"
         name="imageId"
         label=""
+        defaultValue={imageId}
       />
     </Form>
   );
