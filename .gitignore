@@ -48,8 +48,5 @@ next-env.d.ts
 .yala.db
 .yala.db-journal
 
-# ignore generated zod types, they are re-generated in post install
-src/types/generated
-
 # uploaded files
 /public/uploads
