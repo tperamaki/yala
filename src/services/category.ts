@@ -6,5 +6,10 @@ import prisma from './client';
 import { z } from 'zod';
 
 export const getCategories = async () => {
-  return z.array(CategorySchema).parseAsync(await prisma.category.findMany());
+  try {
+    return z.array(CategorySchema).parseAsync(await prisma.category.findMany());
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
