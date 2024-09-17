@@ -11,6 +11,7 @@ export type SelectProps = {
   id: string;
   name: string;
   options: Option[] | Promise<Option[]>;
+  defaultValue: number | string;
 };
 
 const SelectComponent = ({
@@ -18,6 +19,7 @@ const SelectComponent = ({
   id,
   name,
   options,
+  defaultValue,
 }: SelectProps) => {
   const useOptions = Array.isArray(options) ? options : use(options);
   return (
@@ -26,6 +28,7 @@ const SelectComponent = ({
       disabled={disabled}
       id={id}
       name={name}
+      defaultValue={defaultValue}
       className="appearance-none rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-gray-200 dark:border-slate-700 dark:text-slate-700 dark:focus:ring-slate-950"
     >
       {useOptions.map(({ key, label, value }) => (
@@ -46,6 +49,7 @@ export const Select = (props: SelectProps) => {
           id={props.id}
           name={props.name}
           options={[{ key: 'fallback', label: 'Loading', value: '' }]}
+          defaultValue={''}
         />
       }
     >
