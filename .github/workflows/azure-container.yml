@@ -1,4 +1,7 @@
-on: [push]
+on:
+  push:
+    branches:
+      - main
 name: Azure Registry Container Creation
 
 jobs:
@@ -25,7 +28,8 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-          sed "s/POSTGRES_URL=.*/POSTGRES_URL=$DATABASE_URL/g" .env > .env
+          mv .env .env.old
+          sed "s/POSTGRES_URL=.*/POSTGRES_URL='$DATABASE_URL'/g" .env.old > .env
           docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/yala:${{ github.sha }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/yala:${{ github.sha }}
 
