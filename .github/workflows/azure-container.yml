@@ -1,4 +1,7 @@
-on: [push]
+on:
+  push:
+    branches:
+      - main
 name: Azure Registry Container Creation
 
 jobs:
