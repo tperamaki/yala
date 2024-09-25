@@ -26,7 +26,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           mv .env .env.old
-          sed "s/POSTGRES_URL=.*/POSTGRES_URL='$DATABASE_URL'/g" .env.old > .env
+          sed "s!POSTGRES_URL=.*!POSTGRES_URL='$DATABASE_URL'!g" .env.old > .env
           docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/yala:${{ github.sha }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/yala:${{ github.sha }}
 
