@@ -8,21 +8,16 @@ import { RestaurantMaxOrderByAggregateInputSchema } from './RestaurantMaxOrderBy
 import { RestaurantMinOrderByAggregateInputSchema } from './RestaurantMinOrderByAggregateInputSchema';
 import { RestaurantSumOrderByAggregateInputSchema } from './RestaurantSumOrderByAggregateInputSchema';
 
-export const RestaurantOrderByWithAggregationInputSchema: z.ZodType<Prisma.RestaurantOrderByWithAggregationInput> =
-  z
-    .object({
-      id: z.lazy(() => SortOrderSchema).optional(),
-      name: z.lazy(() => SortOrderSchema).optional(),
-      createdAt: z.lazy(() => SortOrderSchema).optional(),
-      createdBy: z.lazy(() => SortOrderSchema).optional(),
-      _count: z
-        .lazy(() => RestaurantCountOrderByAggregateInputSchema)
-        .optional(),
-      _avg: z.lazy(() => RestaurantAvgOrderByAggregateInputSchema).optional(),
-      _max: z.lazy(() => RestaurantMaxOrderByAggregateInputSchema).optional(),
-      _min: z.lazy(() => RestaurantMinOrderByAggregateInputSchema).optional(),
-      _sum: z.lazy(() => RestaurantSumOrderByAggregateInputSchema).optional(),
-    })
-    .strict();
+export const RestaurantOrderByWithAggregationInputSchema: z.ZodType<Prisma.RestaurantOrderByWithAggregationInput> = z.object({
+  id: z.lazy(() => SortOrderSchema).optional(),
+  name: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  createdBy: z.lazy(() => SortOrderSchema).optional(),
+  _count: z.lazy(() => RestaurantCountOrderByAggregateInputSchema).optional(),
+  _avg: z.lazy(() => RestaurantAvgOrderByAggregateInputSchema).optional(),
+  _max: z.lazy(() => RestaurantMaxOrderByAggregateInputSchema).optional(),
+  _min: z.lazy(() => RestaurantMinOrderByAggregateInputSchema).optional(),
+  _sum: z.lazy(() => RestaurantSumOrderByAggregateInputSchema).optional()
+}).strict();
 
 export default RestaurantOrderByWithAggregationInputSchema;

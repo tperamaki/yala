@@ -9,24 +9,16 @@ import { CategoryMaxOrderByAggregateInputSchema } from './CategoryMaxOrderByAggr
 import { CategoryMinOrderByAggregateInputSchema } from './CategoryMinOrderByAggregateInputSchema';
 import { CategorySumOrderByAggregateInputSchema } from './CategorySumOrderByAggregateInputSchema';
 
-export const CategoryOrderByWithAggregationInputSchema: z.ZodType<Prisma.CategoryOrderByWithAggregationInput> =
-  z
-    .object({
-      id: z.lazy(() => SortOrderSchema).optional(),
-      name: z.lazy(() => SortOrderSchema).optional(),
-      createdAt: z.lazy(() => SortOrderSchema).optional(),
-      createdBy: z
-        .union([
-          z.lazy(() => SortOrderSchema),
-          z.lazy(() => SortOrderInputSchema),
-        ])
-        .optional(),
-      _count: z.lazy(() => CategoryCountOrderByAggregateInputSchema).optional(),
-      _avg: z.lazy(() => CategoryAvgOrderByAggregateInputSchema).optional(),
-      _max: z.lazy(() => CategoryMaxOrderByAggregateInputSchema).optional(),
-      _min: z.lazy(() => CategoryMinOrderByAggregateInputSchema).optional(),
-      _sum: z.lazy(() => CategorySumOrderByAggregateInputSchema).optional(),
-    })
-    .strict();
+export const CategoryOrderByWithAggregationInputSchema: z.ZodType<Prisma.CategoryOrderByWithAggregationInput> = z.object({
+  id: z.lazy(() => SortOrderSchema).optional(),
+  name: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  createdBy: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
+  _count: z.lazy(() => CategoryCountOrderByAggregateInputSchema).optional(),
+  _avg: z.lazy(() => CategoryAvgOrderByAggregateInputSchema).optional(),
+  _max: z.lazy(() => CategoryMaxOrderByAggregateInputSchema).optional(),
+  _min: z.lazy(() => CategoryMinOrderByAggregateInputSchema).optional(),
+  _sum: z.lazy(() => CategorySumOrderByAggregateInputSchema).optional()
+}).strict();
 
 export default CategoryOrderByWithAggregationInputSchema;
