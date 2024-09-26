@@ -7,7 +7,7 @@ import { RestaurantCreateInputSchema } from '@/types/generated';
 import { addRestaurantAction } from '@/actions/addRestaurant';
 import { Multiselect } from 'react-widgets';
 import { use, useState } from 'react';
-import { Category } from '@prisma/client';
+import { Category } from '@/types/generated';
 
 type InputType = Omit<z.infer<typeof RestaurantCreateInputSchema>, 'createdBy'>;
 
