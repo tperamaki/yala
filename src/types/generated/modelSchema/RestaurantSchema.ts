@@ -9,8 +9,8 @@ export const RestaurantSchema = z.object({
   name: z.string(),
   createdAt: z.coerce.date(),
   createdBy: z.string(),
-})
+});
 
-export type Restaurant = z.infer<typeof RestaurantSchema>
+export type Restaurant = z.infer<typeof RestaurantSchema>;
 
 export default RestaurantSchema;

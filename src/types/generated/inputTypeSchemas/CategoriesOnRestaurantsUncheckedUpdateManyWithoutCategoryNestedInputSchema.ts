@@ -11,18 +11,119 @@ import { CategoriesOnRestaurantsUpdateWithWhereUniqueWithoutCategoryInputSchema 
 import { CategoriesOnRestaurantsUpdateManyWithWhereWithoutCategoryInputSchema } from './CategoriesOnRestaurantsUpdateManyWithWhereWithoutCategoryInputSchema';
 import { CategoriesOnRestaurantsScalarWhereInputSchema } from './CategoriesOnRestaurantsScalarWhereInputSchema';
 
-export const CategoriesOnRestaurantsUncheckedUpdateManyWithoutCategoryNestedInputSchema: z.ZodType<Prisma.CategoriesOnRestaurantsUncheckedUpdateManyWithoutCategoryNestedInput> = z.object({
-  create: z.union([ z.lazy(() => CategoriesOnRestaurantsCreateWithoutCategoryInputSchema),z.lazy(() => CategoriesOnRestaurantsCreateWithoutCategoryInputSchema).array(),z.lazy(() => CategoriesOnRestaurantsUncheckedCreateWithoutCategoryInputSchema),z.lazy(() => CategoriesOnRestaurantsUncheckedCreateWithoutCategoryInputSchema).array() ]).optional(),
-  connectOrCreate: z.union([ z.lazy(() => CategoriesOnRestaurantsCreateOrConnectWithoutCategoryInputSchema),z.lazy(() => CategoriesOnRestaurantsCreateOrConnectWithoutCategoryInputSchema).array() ]).optional(),
-  upsert: z.union([ z.lazy(() => CategoriesOnRestaurantsUpsertWithWhereUniqueWithoutCategoryInputSchema),z.lazy(() => CategoriesOnRestaurantsUpsertWithWhereUniqueWithoutCategoryInputSchema).array() ]).optional(),
-  createMany: z.lazy(() => CategoriesOnRestaurantsCreateManyCategoryInputEnvelopeSchema).optional(),
-  set: z.union([ z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema),z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema).array() ]).optional(),
-  disconnect: z.union([ z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema),z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema).array() ]).optional(),
-  delete: z.union([ z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema),z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema).array() ]).optional(),
-  connect: z.union([ z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema),z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema).array() ]).optional(),
-  update: z.union([ z.lazy(() => CategoriesOnRestaurantsUpdateWithWhereUniqueWithoutCategoryInputSchema),z.lazy(() => CategoriesOnRestaurantsUpdateWithWhereUniqueWithoutCategoryInputSchema).array() ]).optional(),
-  updateMany: z.union([ z.lazy(() => CategoriesOnRestaurantsUpdateManyWithWhereWithoutCategoryInputSchema),z.lazy(() => CategoriesOnRestaurantsUpdateManyWithWhereWithoutCategoryInputSchema).array() ]).optional(),
-  deleteMany: z.union([ z.lazy(() => CategoriesOnRestaurantsScalarWhereInputSchema),z.lazy(() => CategoriesOnRestaurantsScalarWhereInputSchema).array() ]).optional(),
-}).strict();
+export const CategoriesOnRestaurantsUncheckedUpdateManyWithoutCategoryNestedInputSchema: z.ZodType<Prisma.CategoriesOnRestaurantsUncheckedUpdateManyWithoutCategoryNestedInput> =
+  z
+    .object({
+      create: z
+        .union([
+          z.lazy(() => CategoriesOnRestaurantsCreateWithoutCategoryInputSchema),
+          z
+            .lazy(() => CategoriesOnRestaurantsCreateWithoutCategoryInputSchema)
+            .array(),
+          z.lazy(
+            () =>
+              CategoriesOnRestaurantsUncheckedCreateWithoutCategoryInputSchema,
+          ),
+          z
+            .lazy(
+              () =>
+                CategoriesOnRestaurantsUncheckedCreateWithoutCategoryInputSchema,
+            )
+            .array(),
+        ])
+        .optional(),
+      connectOrCreate: z
+        .union([
+          z.lazy(
+            () =>
+              CategoriesOnRestaurantsCreateOrConnectWithoutCategoryInputSchema,
+          ),
+          z
+            .lazy(
+              () =>
+                CategoriesOnRestaurantsCreateOrConnectWithoutCategoryInputSchema,
+            )
+            .array(),
+        ])
+        .optional(),
+      upsert: z
+        .union([
+          z.lazy(
+            () =>
+              CategoriesOnRestaurantsUpsertWithWhereUniqueWithoutCategoryInputSchema,
+          ),
+          z
+            .lazy(
+              () =>
+                CategoriesOnRestaurantsUpsertWithWhereUniqueWithoutCategoryInputSchema,
+            )
+            .array(),
+        ])
+        .optional(),
+      createMany: z
+        .lazy(
+          () => CategoriesOnRestaurantsCreateManyCategoryInputEnvelopeSchema,
+        )
+        .optional(),
+      set: z
+        .union([
+          z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema),
+          z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema).array(),
+        ])
+        .optional(),
+      disconnect: z
+        .union([
+          z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema),
+          z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema).array(),
+        ])
+        .optional(),
+      delete: z
+        .union([
+          z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema),
+          z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema).array(),
+        ])
+        .optional(),
+      connect: z
+        .union([
+          z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema),
+          z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema).array(),
+        ])
+        .optional(),
+      update: z
+        .union([
+          z.lazy(
+            () =>
+              CategoriesOnRestaurantsUpdateWithWhereUniqueWithoutCategoryInputSchema,
+          ),
+          z
+            .lazy(
+              () =>
+                CategoriesOnRestaurantsUpdateWithWhereUniqueWithoutCategoryInputSchema,
+            )
+            .array(),
+        ])
+        .optional(),
+      updateMany: z
+        .union([
+          z.lazy(
+            () =>
+              CategoriesOnRestaurantsUpdateManyWithWhereWithoutCategoryInputSchema,
+          ),
+          z
+            .lazy(
+              () =>
+                CategoriesOnRestaurantsUpdateManyWithWhereWithoutCategoryInputSchema,
+            )
+            .array(),
+        ])
+        .optional(),
+      deleteMany: z
+        .union([
+          z.lazy(() => CategoriesOnRestaurantsScalarWhereInputSchema),
+          z.lazy(() => CategoriesOnRestaurantsScalarWhereInputSchema).array(),
+        ])
+        .optional(),
+    })
+    .strict();
 
 export default CategoriesOnRestaurantsUncheckedUpdateManyWithoutCategoryNestedInputSchema;
