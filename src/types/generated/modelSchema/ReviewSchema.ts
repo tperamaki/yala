@@ -11,8 +11,8 @@ export const ReviewSchema = z.object({
   createdBy: z.string(),
   comment: z.string(),
   imageId: z.string(),
-});
+})
 
-export type Review = z.infer<typeof ReviewSchema>;
+export type Review = z.infer<typeof ReviewSchema>
 
 export default ReviewSchema;

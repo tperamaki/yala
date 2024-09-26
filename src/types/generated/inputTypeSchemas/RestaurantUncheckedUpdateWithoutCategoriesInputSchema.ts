@@ -6,37 +6,12 @@ import { StringFieldUpdateOperationsInputSchema } from './StringFieldUpdateOpera
 import { DateTimeFieldUpdateOperationsInputSchema } from './DateTimeFieldUpdateOperationsInputSchema';
 import { ReviewUncheckedUpdateManyWithoutRestaurantNestedInputSchema } from './ReviewUncheckedUpdateManyWithoutRestaurantNestedInputSchema';
 
-export const RestaurantUncheckedUpdateWithoutCategoriesInputSchema: z.ZodType<Prisma.RestaurantUncheckedUpdateWithoutCategoriesInput> =
-  z
-    .object({
-      id: z
-        .union([
-          z.number().int(),
-          z.lazy(() => IntFieldUpdateOperationsInputSchema),
-        ])
-        .optional(),
-      name: z
-        .union([
-          z.string(),
-          z.lazy(() => StringFieldUpdateOperationsInputSchema),
-        ])
-        .optional(),
-      createdAt: z
-        .union([
-          z.coerce.date(),
-          z.lazy(() => DateTimeFieldUpdateOperationsInputSchema),
-        ])
-        .optional(),
-      createdBy: z
-        .union([
-          z.string(),
-          z.lazy(() => StringFieldUpdateOperationsInputSchema),
-        ])
-        .optional(),
-      reviews: z
-        .lazy(() => ReviewUncheckedUpdateManyWithoutRestaurantNestedInputSchema)
-        .optional(),
-    })
-    .strict();
+export const RestaurantUncheckedUpdateWithoutCategoriesInputSchema: z.ZodType<Prisma.RestaurantUncheckedUpdateWithoutCategoriesInput> = z.object({
+  id: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
+  name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  createdBy: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  reviews: z.lazy(() => ReviewUncheckedUpdateManyWithoutRestaurantNestedInputSchema).optional()
+}).strict();
 
 export default RestaurantUncheckedUpdateWithoutCategoriesInputSchema;
