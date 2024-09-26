@@ -29,5 +29,5 @@ jobs:
           npx prettier --write src
           git config --global user.name 'Linter action'
           git config --global user.email 'linter-action@example.com'
-          git commit -a -m "Run linters"
+          git commit -a -m "Run linters" || true
           git push
