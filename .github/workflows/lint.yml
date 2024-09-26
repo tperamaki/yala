@@ -26,7 +26,7 @@ jobs:
       - name: Run linters
         run: |
           npx eslint src
-          npx prettier src
+          npx prettier --write src
           git config --global user.name 'Linter action'
           git config --global user.email 'linter-action@example.com'
           git commit -a -m "Run linters"
