@@ -6,10 +6,20 @@ import { RestaurantUncheckedCreateWithoutCategoriesInputSchema } from './Restaur
 import { RestaurantCreateOrConnectWithoutCategoriesInputSchema } from './RestaurantCreateOrConnectWithoutCategoriesInputSchema';
 import { RestaurantWhereUniqueInputSchema } from './RestaurantWhereUniqueInputSchema';
 
-export const RestaurantCreateNestedOneWithoutCategoriesInputSchema: z.ZodType<Prisma.RestaurantCreateNestedOneWithoutCategoriesInput> = z.object({
-  create: z.union([ z.lazy(() => RestaurantCreateWithoutCategoriesInputSchema),z.lazy(() => RestaurantUncheckedCreateWithoutCategoriesInputSchema) ]).optional(),
-  connectOrCreate: z.lazy(() => RestaurantCreateOrConnectWithoutCategoriesInputSchema).optional(),
-  connect: z.lazy(() => RestaurantWhereUniqueInputSchema).optional()
-}).strict();
+export const RestaurantCreateNestedOneWithoutCategoriesInputSchema: z.ZodType<Prisma.RestaurantCreateNestedOneWithoutCategoriesInput> =
+  z
+    .object({
+      create: z
+        .union([
+          z.lazy(() => RestaurantCreateWithoutCategoriesInputSchema),
+          z.lazy(() => RestaurantUncheckedCreateWithoutCategoriesInputSchema),
+        ])
+        .optional(),
+      connectOrCreate: z
+        .lazy(() => RestaurantCreateOrConnectWithoutCategoriesInputSchema)
+        .optional(),
+      connect: z.lazy(() => RestaurantWhereUniqueInputSchema).optional(),
+    })
+    .strict();
 
 export default RestaurantCreateNestedOneWithoutCategoriesInputSchema;

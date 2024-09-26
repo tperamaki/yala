@@ -5,11 +5,35 @@ import { IntFieldUpdateOperationsInputSchema } from './IntFieldUpdateOperationsI
 import { DateTimeFieldUpdateOperationsInputSchema } from './DateTimeFieldUpdateOperationsInputSchema';
 import { NullableStringFieldUpdateOperationsInputSchema } from './NullableStringFieldUpdateOperationsInputSchema';
 
-export const CategoriesOnRestaurantsUncheckedUpdateInputSchema: z.ZodType<Prisma.CategoriesOnRestaurantsUncheckedUpdateInput> = z.object({
-  categoryId: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
-  restaurantId: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
-  assignedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
-  assignedBy: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
-}).strict();
+export const CategoriesOnRestaurantsUncheckedUpdateInputSchema: z.ZodType<Prisma.CategoriesOnRestaurantsUncheckedUpdateInput> =
+  z
+    .object({
+      categoryId: z
+        .union([
+          z.number().int(),
+          z.lazy(() => IntFieldUpdateOperationsInputSchema),
+        ])
+        .optional(),
+      restaurantId: z
+        .union([
+          z.number().int(),
+          z.lazy(() => IntFieldUpdateOperationsInputSchema),
+        ])
+        .optional(),
+      assignedAt: z
+        .union([
+          z.coerce.date(),
+          z.lazy(() => DateTimeFieldUpdateOperationsInputSchema),
+        ])
+        .optional(),
+      assignedBy: z
+        .union([
+          z.string(),
+          z.lazy(() => NullableStringFieldUpdateOperationsInputSchema),
+        ])
+        .optional()
+        .nullable(),
+    })
+    .strict();
 
 export default CategoriesOnRestaurantsUncheckedUpdateInputSchema;

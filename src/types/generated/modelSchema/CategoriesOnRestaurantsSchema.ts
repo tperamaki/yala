@@ -9,8 +9,10 @@ export const CategoriesOnRestaurantsSchema = z.object({
   restaurantId: z.number().int(),
   assignedAt: z.coerce.date(),
   assignedBy: z.string().nullable(),
-})
+});
 
-export type CategoriesOnRestaurants = z.infer<typeof CategoriesOnRestaurantsSchema>
+export type CategoriesOnRestaurants = z.infer<
+  typeof CategoriesOnRestaurantsSchema
+>;
 
 export default CategoriesOnRestaurantsSchema;
