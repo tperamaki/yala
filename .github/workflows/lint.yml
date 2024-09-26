@@ -32,3 +32,5 @@ jobs:
           eslint_extensions: js,jsx,ts,tsx
           prettier: true
           prettier_dir: src
+          prettier_args: '--ignore-path ./.prettierignore'
+          prettier_extensions: js,jsx,ts,tsx

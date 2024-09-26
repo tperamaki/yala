@@ -7,37 +7,11 @@ import { ReviewCreateOrConnectWithoutRestaurantInputSchema } from './ReviewCreat
 import { ReviewCreateManyRestaurantInputEnvelopeSchema } from './ReviewCreateManyRestaurantInputEnvelopeSchema';
 import { ReviewWhereUniqueInputSchema } from './ReviewWhereUniqueInputSchema';
 
-export const ReviewCreateNestedManyWithoutRestaurantInputSchema: z.ZodType<Prisma.ReviewCreateNestedManyWithoutRestaurantInput> =
-  z
-    .object({
-      create: z
-        .union([
-          z.lazy(() => ReviewCreateWithoutRestaurantInputSchema),
-          z.lazy(() => ReviewCreateWithoutRestaurantInputSchema).array(),
-          z.lazy(() => ReviewUncheckedCreateWithoutRestaurantInputSchema),
-          z
-            .lazy(() => ReviewUncheckedCreateWithoutRestaurantInputSchema)
-            .array(),
-        ])
-        .optional(),
-      connectOrCreate: z
-        .union([
-          z.lazy(() => ReviewCreateOrConnectWithoutRestaurantInputSchema),
-          z
-            .lazy(() => ReviewCreateOrConnectWithoutRestaurantInputSchema)
-            .array(),
-        ])
-        .optional(),
-      createMany: z
-        .lazy(() => ReviewCreateManyRestaurantInputEnvelopeSchema)
-        .optional(),
-      connect: z
-        .union([
-          z.lazy(() => ReviewWhereUniqueInputSchema),
-          z.lazy(() => ReviewWhereUniqueInputSchema).array(),
-        ])
-        .optional(),
-    })
-    .strict();
+export const ReviewCreateNestedManyWithoutRestaurantInputSchema: z.ZodType<Prisma.ReviewCreateNestedManyWithoutRestaurantInput> = z.object({
+  create: z.union([ z.lazy(() => ReviewCreateWithoutRestaurantInputSchema),z.lazy(() => ReviewCreateWithoutRestaurantInputSchema).array(),z.lazy(() => ReviewUncheckedCreateWithoutRestaurantInputSchema),z.lazy(() => ReviewUncheckedCreateWithoutRestaurantInputSchema).array() ]).optional(),
+  connectOrCreate: z.union([ z.lazy(() => ReviewCreateOrConnectWithoutRestaurantInputSchema),z.lazy(() => ReviewCreateOrConnectWithoutRestaurantInputSchema).array() ]).optional(),
+  createMany: z.lazy(() => ReviewCreateManyRestaurantInputEnvelopeSchema).optional(),
+  connect: z.union([ z.lazy(() => ReviewWhereUniqueInputSchema),z.lazy(() => ReviewWhereUniqueInputSchema).array() ]).optional(),
+}).strict();
 
 export default ReviewCreateNestedManyWithoutRestaurantInputSchema;
