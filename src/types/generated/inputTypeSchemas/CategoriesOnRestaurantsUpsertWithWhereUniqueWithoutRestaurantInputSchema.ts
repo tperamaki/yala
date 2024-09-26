@@ -7,10 +7,25 @@ import { CategoriesOnRestaurantsUncheckedUpdateWithoutRestaurantInputSchema } fr
 import { CategoriesOnRestaurantsCreateWithoutRestaurantInputSchema } from './CategoriesOnRestaurantsCreateWithoutRestaurantInputSchema';
 import { CategoriesOnRestaurantsUncheckedCreateWithoutRestaurantInputSchema } from './CategoriesOnRestaurantsUncheckedCreateWithoutRestaurantInputSchema';
 
-export const CategoriesOnRestaurantsUpsertWithWhereUniqueWithoutRestaurantInputSchema: z.ZodType<Prisma.CategoriesOnRestaurantsUpsertWithWhereUniqueWithoutRestaurantInput> = z.object({
-  where: z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema),
-  update: z.union([ z.lazy(() => CategoriesOnRestaurantsUpdateWithoutRestaurantInputSchema),z.lazy(() => CategoriesOnRestaurantsUncheckedUpdateWithoutRestaurantInputSchema) ]),
-  create: z.union([ z.lazy(() => CategoriesOnRestaurantsCreateWithoutRestaurantInputSchema),z.lazy(() => CategoriesOnRestaurantsUncheckedCreateWithoutRestaurantInputSchema) ]),
-}).strict();
+export const CategoriesOnRestaurantsUpsertWithWhereUniqueWithoutRestaurantInputSchema: z.ZodType<Prisma.CategoriesOnRestaurantsUpsertWithWhereUniqueWithoutRestaurantInput> =
+  z
+    .object({
+      where: z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema),
+      update: z.union([
+        z.lazy(() => CategoriesOnRestaurantsUpdateWithoutRestaurantInputSchema),
+        z.lazy(
+          () =>
+            CategoriesOnRestaurantsUncheckedUpdateWithoutRestaurantInputSchema,
+        ),
+      ]),
+      create: z.union([
+        z.lazy(() => CategoriesOnRestaurantsCreateWithoutRestaurantInputSchema),
+        z.lazy(
+          () =>
+            CategoriesOnRestaurantsUncheckedCreateWithoutRestaurantInputSchema,
+        ),
+      ]),
+    })
+    .strict();
 
 export default CategoriesOnRestaurantsUpsertWithWhereUniqueWithoutRestaurantInputSchema;
