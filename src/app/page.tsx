@@ -1,6 +1,6 @@
 import { permanentRedirect } from 'next/navigation';
 
-const Home = ( ) => {
+const Home = () => {
   permanentRedirect('/restaurant');
 };
 
