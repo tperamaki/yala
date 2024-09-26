@@ -24,13 +24,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          auto_fix: true
-          eslint: true
-          eslint_dir: src
-          eslint_extensions: js,jsx,ts,tsx
-          prettier: true
-          prettier_dir: src
-          prettier_args: '--ignore-path ./.prettierignore'
-          prettier_extensions: js,jsx,ts,tsx
+        run: |
+          npx eslint src
+          npx prettier src
+          git config --global user.name 'Linter action'
+          git config --global user.email 'linter-action@example.com'
+          git commit -a -m "Run linters"
+          git push
