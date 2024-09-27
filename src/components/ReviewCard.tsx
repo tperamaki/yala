@@ -40,6 +40,22 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
           Your review
         </p>
       )}
+      {/* TODO: remember to change isOwnReview -> ! isOwnReview */}
+      {isOwnReview && (
+        <p className='mt-2'>
+          <button
+            className='mr-2'
+            title="Vote thumbs up"
+            onClick={() => alert('Thumbs up!')}>
+            👍
+          </button>
+          <button
+            title="Vote thumbs down"
+            onClick={() => alert('Thumbs down!')}>
+            👎
+          </button>
+        </p>
+      )}
     </div>
   );
 };
