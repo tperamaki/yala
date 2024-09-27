@@ -9,8 +9,8 @@ export const CategorySchema = z.object({
   name: z.string(),
   createdAt: z.coerce.date(),
   createdBy: z.string().nullable(),
-});
+})
 
-export type Category = z.infer<typeof CategorySchema>;
+export type Category = z.infer<typeof CategorySchema>
 
 export default CategorySchema;

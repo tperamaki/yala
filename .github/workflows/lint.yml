@@ -17,6 +17,17 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
+        if: github.event_name == 'pull_request'
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+        if: github.event_name == 'push'
+        with:
+          fetch-depth: 0
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -24,11 +35,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          auto_fix: true
-          eslint: true
-          eslint_dir: src
-          eslint_extensions: js,jsx,ts,tsx
-          prettier: true
-          prettier_dir: src
+        run: |
+          npx eslint src
+          npx prettier --write src
+          git config --global user.name 'Linter action'
+          git config --global user.email 'linter-action@example.com'
+          git commit -a -m "Run linters" || true
+          git push

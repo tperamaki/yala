@@ -5,18 +5,9 @@ import { CategoriesOnRestaurantsWhereUniqueInputSchema } from './CategoriesOnRes
 import { CategoriesOnRestaurantsUpdateWithoutCategoryInputSchema } from './CategoriesOnRestaurantsUpdateWithoutCategoryInputSchema';
 import { CategoriesOnRestaurantsUncheckedUpdateWithoutCategoryInputSchema } from './CategoriesOnRestaurantsUncheckedUpdateWithoutCategoryInputSchema';
 
-export const CategoriesOnRestaurantsUpdateWithWhereUniqueWithoutCategoryInputSchema: z.ZodType<Prisma.CategoriesOnRestaurantsUpdateWithWhereUniqueWithoutCategoryInput> =
-  z
-    .object({
-      where: z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema),
-      data: z.union([
-        z.lazy(() => CategoriesOnRestaurantsUpdateWithoutCategoryInputSchema),
-        z.lazy(
-          () =>
-            CategoriesOnRestaurantsUncheckedUpdateWithoutCategoryInputSchema,
-        ),
-      ]),
-    })
-    .strict();
+export const CategoriesOnRestaurantsUpdateWithWhereUniqueWithoutCategoryInputSchema: z.ZodType<Prisma.CategoriesOnRestaurantsUpdateWithWhereUniqueWithoutCategoryInput> = z.object({
+  where: z.lazy(() => CategoriesOnRestaurantsWhereUniqueInputSchema),
+  data: z.union([ z.lazy(() => CategoriesOnRestaurantsUpdateWithoutCategoryInputSchema),z.lazy(() => CategoriesOnRestaurantsUncheckedUpdateWithoutCategoryInputSchema) ]),
+}).strict();
 
 export default CategoriesOnRestaurantsUpdateWithWhereUniqueWithoutCategoryInputSchema;

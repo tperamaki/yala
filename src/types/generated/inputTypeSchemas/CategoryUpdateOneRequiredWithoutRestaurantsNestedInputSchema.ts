@@ -10,32 +10,12 @@ import { CategoryUpdateToOneWithWhereWithoutRestaurantsInputSchema } from './Cat
 import { CategoryUpdateWithoutRestaurantsInputSchema } from './CategoryUpdateWithoutRestaurantsInputSchema';
 import { CategoryUncheckedUpdateWithoutRestaurantsInputSchema } from './CategoryUncheckedUpdateWithoutRestaurantsInputSchema';
 
-export const CategoryUpdateOneRequiredWithoutRestaurantsNestedInputSchema: z.ZodType<Prisma.CategoryUpdateOneRequiredWithoutRestaurantsNestedInput> =
-  z
-    .object({
-      create: z
-        .union([
-          z.lazy(() => CategoryCreateWithoutRestaurantsInputSchema),
-          z.lazy(() => CategoryUncheckedCreateWithoutRestaurantsInputSchema),
-        ])
-        .optional(),
-      connectOrCreate: z
-        .lazy(() => CategoryCreateOrConnectWithoutRestaurantsInputSchema)
-        .optional(),
-      upsert: z
-        .lazy(() => CategoryUpsertWithoutRestaurantsInputSchema)
-        .optional(),
-      connect: z.lazy(() => CategoryWhereUniqueInputSchema).optional(),
-      update: z
-        .union([
-          z.lazy(
-            () => CategoryUpdateToOneWithWhereWithoutRestaurantsInputSchema,
-          ),
-          z.lazy(() => CategoryUpdateWithoutRestaurantsInputSchema),
-          z.lazy(() => CategoryUncheckedUpdateWithoutRestaurantsInputSchema),
-        ])
-        .optional(),
-    })
-    .strict();
+export const CategoryUpdateOneRequiredWithoutRestaurantsNestedInputSchema: z.ZodType<Prisma.CategoryUpdateOneRequiredWithoutRestaurantsNestedInput> = z.object({
+  create: z.union([ z.lazy(() => CategoryCreateWithoutRestaurantsInputSchema),z.lazy(() => CategoryUncheckedCreateWithoutRestaurantsInputSchema) ]).optional(),
+  connectOrCreate: z.lazy(() => CategoryCreateOrConnectWithoutRestaurantsInputSchema).optional(),
+  upsert: z.lazy(() => CategoryUpsertWithoutRestaurantsInputSchema).optional(),
+  connect: z.lazy(() => CategoryWhereUniqueInputSchema).optional(),
+  update: z.union([ z.lazy(() => CategoryUpdateToOneWithWhereWithoutRestaurantsInputSchema),z.lazy(() => CategoryUpdateWithoutRestaurantsInputSchema),z.lazy(() => CategoryUncheckedUpdateWithoutRestaurantsInputSchema) ]).optional(),
+}).strict();
 
 export default CategoryUpdateOneRequiredWithoutRestaurantsNestedInputSchema;

@@ -5,15 +5,9 @@ import { RestaurantWhereUniqueInputSchema } from './RestaurantWhereUniqueInputSc
 import { RestaurantCreateWithoutReviewsInputSchema } from './RestaurantCreateWithoutReviewsInputSchema';
 import { RestaurantUncheckedCreateWithoutReviewsInputSchema } from './RestaurantUncheckedCreateWithoutReviewsInputSchema';
 
-export const RestaurantCreateOrConnectWithoutReviewsInputSchema: z.ZodType<Prisma.RestaurantCreateOrConnectWithoutReviewsInput> =
-  z
-    .object({
-      where: z.lazy(() => RestaurantWhereUniqueInputSchema),
-      create: z.union([
-        z.lazy(() => RestaurantCreateWithoutReviewsInputSchema),
-        z.lazy(() => RestaurantUncheckedCreateWithoutReviewsInputSchema),
-      ]),
-    })
-    .strict();
+export const RestaurantCreateOrConnectWithoutReviewsInputSchema: z.ZodType<Prisma.RestaurantCreateOrConnectWithoutReviewsInput> = z.object({
+  where: z.lazy(() => RestaurantWhereUniqueInputSchema),
+  create: z.union([ z.lazy(() => RestaurantCreateWithoutReviewsInputSchema),z.lazy(() => RestaurantUncheckedCreateWithoutReviewsInputSchema) ]),
+}).strict();
 
 export default RestaurantCreateOrConnectWithoutReviewsInputSchema;
