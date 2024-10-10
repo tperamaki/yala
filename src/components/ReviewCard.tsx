@@ -10,6 +10,9 @@ export type ReviewCardProps = {
 const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
   const { rating, createdAt, comment, imageId } = review;
 
+  const thumbUps = review.thumbsignals.filter(ts => ts.signalVariant === "UP")
+  const thumbDowns = review.thumbsignals.filter(ts => ts.signalVariant === "DOWN")
+
   return (
     <div className="mb-4 flex flex-col rounded-lg bg-stone-100 p-4 dark:bg-stone-800">
       <div className="flex items-center justify-between">
@@ -44,7 +47,6 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
       {/* TODO: remember to change isOwnReview -> ! isOwnReview */}
       {isOwnReview && (
         <p className='mt-2'>
-          <p>{review.thumbsignals.length}</p>
           <button
             className='mr-2'
             title="Vote thumbs up"
@@ -55,12 +57,17 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
                 }
               }
             }>
-            👍
+            👍 ({thumbUps.length})
           </button>
           <button
             title="Vote thumbs down"
-            onClick={() => alert('Thumbs down!')}>
-            👎
+            onClick={ async () => {
+              const result = await sendThumbSignal("DOWN", review.restaurantId, review.createdBy) 
+                if (!result) {
+                  alert('fail')
+                }
+            }}>
+            👎 ({thumbDowns.length})
           </button>
         </p>
       )}
