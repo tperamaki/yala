@@ -14,6 +14,9 @@ import { getUserIdFromIdToken } from './utils';
 export const getReviews = async (restaurantId: number) => {
   const findManyArgs = ReviewFindManyArgsSchema.parse({
     where: { restaurantId },
+    include: {
+      thumbsignals: true,
+    },
   });
   return z
     .array(ReviewSchema)

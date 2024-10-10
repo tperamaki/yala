@@ -1,8 +1,9 @@
 import Image from 'next/image';
-import { Review } from '@/types/generated';
+import { Review, Thumbsignal } from '@/types/generated';
+import { sendThumbSignal } from '@/services/thumbsignal';
 
 export type ReviewCardProps = {
-  review: Review;
+  review: Review & {thumbsignals: Thumbsignal[]};
   isOwnReview: boolean;
 };
 
@@ -43,10 +44,17 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
       {/* TODO: remember to change isOwnReview -> ! isOwnReview */}
       {isOwnReview && (
         <p className='mt-2'>
+          <p>{review.thumbsignals.length}</p>
           <button
             className='mr-2'
             title="Vote thumbs up"
-            onClick={() => alert('Thumbs up!')}>
+            onClick={ async () => { 
+                const result = await sendThumbSignal("UP", review.restaurantId, review.createdBy) 
+                if (!result) {
+                  alert('fail')
+                }
+              }
+            }>
             👍
           </button>
           <button

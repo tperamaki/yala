@@ -26,6 +26,13 @@ erDiagram
     }
   
 
+  "Thumbsignal" {
+    String signalVariant 
+    DateTime createdAt 
+    String createdBy "🗝️"
+    }
+  
+
   "CategoriesOnRestaurants" {
     DateTime assignedAt 
     String assignedBy "❓"
@@ -35,6 +42,8 @@ erDiagram
     "Restaurant" o{--}o "CategoriesOnRestaurants" : "categories"
     "Restaurant" o{--}o "Review" : "reviews"
     "Review" o|--|| "Restaurant" : "restaurant"
+    "Review" o{--}o "Thumbsignal" : "thumbsignals"
+    "Thumbsignal" o|--|| "Review" : "review"
     "CategoriesOnRestaurants" o|--|| "Category" : "category"
     "CategoriesOnRestaurants" o|--|| "Restaurant" : "restaurant"
 ```

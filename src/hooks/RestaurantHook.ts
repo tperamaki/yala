@@ -5,11 +5,12 @@ import {
   Category,
   Restaurant,
   Review,
+  Thumbsignal,
 } from '@/types/generated';
 import { useEffect, useState } from 'react';
 
 export type EnrichedRestaurant = Restaurant & {
-  reviews: Review[];
+  reviews: (Review & { thumbsignals: Thumbsignal[] })[];
   averageReview?: number;
   reviewCount: number;
   categories: (CategoriesOnRestaurants & { category: Category })[];
