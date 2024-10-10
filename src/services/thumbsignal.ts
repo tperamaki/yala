@@ -71,7 +71,8 @@ export const sendThumbSignal = async (
     console.log(
       'Create thumbsignal ' + JSON.stringify(payload) + ' ' + signalVariant,
     );
-    const objThing = {
+
+    await prisma.thumbsignal.upsert({
       where: {
         reviewedRestaurantId_reviewCreatedBy_createdBy: {
           reviewedRestaurantId: payload.review.connect.restaurantId,
@@ -94,26 +95,7 @@ export const sendThumbSignal = async (
         createdBy: payload.createdBy,
         signalVariant: signalVariant,
       },
-    };
-    // console.log(JSON.stringify(objThing));
-    // prisma.thumbsignal.upsert(objThing);
-    const createdThumbsignal = {
-      data: {
-        review: {
-          connect: {
-            restaurantId_createdBy: {
-              restaurantId: payload.review.connect.restaurantId,
-              createdBy: payload.review.connect.createdBy,
-            },
-          },
-        },
-        createdBy: payload.createdBy,
-        signalVariant: signalVariant,
-      },
-    };
-    console.log('Created TS ' + JSON.stringify(createdThumbsignal));
-    prisma.thumbsignal.create(createdThumbsignal);
-    console.log('Did not throw error');
+    });
     return true;
   } catch (error) {
     console.error(error);
