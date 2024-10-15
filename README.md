@@ -5,6 +5,7 @@ YALA - Yet Another Lunch App
 Prerequisites:
 
 - [Node JS v22](https://nodejs.org/en)
+- Postgres
 
 You can install node using [nvm](https://github.com/nvm-sh/nvm) or for example with [homebrew](https://formulae.brew.sh/formula/node).
 
@@ -20,6 +21,14 @@ the authentication will fail. The default callback URL is `http://localhost:3000
 for local development.
 
 Run project locally with `npm run dev`
+
+## Postgres
+
+Local postgres database is required for running the project. Running it in Docker is the easiest way usually.
+
+```bash
+docker run --name yala-postgres -e POSTGRES_PASSWORD=yala -p 5432:5432 -d postgres
+```
 
 ## Datamodel
 

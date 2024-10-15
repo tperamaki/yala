@@ -10,6 +10,7 @@ import {
 import { z } from 'zod';
 import { getSession } from '@auth0/nextjs-auth0';
 import { getUserIdFromIdToken } from './utils';
+import { revalidatePath } from 'next/cache';
 
 export const getReviews = async (restaurantId: number) => {
   const findManyArgs = ReviewFindManyArgsSchema.parse({
@@ -67,6 +68,8 @@ export const addReview = async <State>(
       },
       create: { ...validatedFields.data },
     });
+
+    revalidatePath('/restaurant');
     return { ...validatedFields.data, errors: undefined };
   } catch (error) {
     console.error(error);
