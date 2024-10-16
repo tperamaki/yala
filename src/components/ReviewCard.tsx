@@ -48,12 +48,8 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
           Your review
         </p>
       )}
-      {/* TODO: 
-        - Prettier buttons
-        - Thumbsignal emojis away from code (use unicode)
-       */}
       {!isOwnReview && (
-        <p className="mt-2">
+        <div className="mt-2">
           <button
             className="mr-2"
             title="Vote thumbs up"
@@ -85,7 +81,7 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
           >
             👎 ({thumbDowns.length})
           </button>
-        </p>
+        </div>
       )}
     </div>
   );
