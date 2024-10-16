@@ -3,15 +3,19 @@ import { Review, Thumbsignal } from '@/types/generated';
 import { sendThumbSignal } from '@/services/thumbsignal';
 
 export type ReviewCardProps = {
-  review: Review & {thumbsignals: Thumbsignal[]};
+  review: Review & { thumbsignals: Thumbsignal[] };
   isOwnReview: boolean;
 };
 
 const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
   const { rating, createdAt, comment, imageId } = review;
 
-  const thumbUps = review.thumbsignals.filter(ts => ts.signalVariant === "UP")
-  const thumbDowns = review.thumbsignals.filter(ts => ts.signalVariant === "DOWN")
+  const thumbUps = review.thumbsignals.filter(
+    (ts) => ts.signalVariant === 'UP',
+  );
+  const thumbDowns = review.thumbsignals.filter(
+    (ts) => ts.signalVariant === 'DOWN',
+  );
 
   return (
     <div className="mb-4 flex flex-col rounded-lg bg-stone-100 p-4 dark:bg-stone-800">
@@ -49,27 +53,36 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
         - Thumbsignal emojis away from code (use unicode)
        */}
       {!isOwnReview && (
-        <p className='mt-2'>
+        <p className="mt-2">
           <button
-            className='mr-2'
+            className="mr-2"
             title="Vote thumbs up"
-            onClick={ async () => { 
-                const result = await sendThumbSignal("UP", review.restaurantId, review.createdBy) 
-                if (!result) {
-                  alert('fail')
-                }
+            onClick={async () => {
+              const result = await sendThumbSignal(
+                'UP',
+                review.restaurantId,
+                review.createdBy,
+              );
+              if (!result) {
+                alert('fail');
               }
-            }>
+            }}
+          >
             👍 ({thumbUps.length})
           </button>
           <button
             title="Vote thumbs down"
-            onClick={ async () => {
-              const result = await sendThumbSignal("DOWN", review.restaurantId, review.createdBy) 
-                if (!result) {
-                  alert('fail')
-                }
-            }}>
+            onClick={async () => {
+              const result = await sendThumbSignal(
+                'DOWN',
+                review.restaurantId,
+                review.createdBy,
+              );
+              if (!result) {
+                alert('fail');
+              }
+            }}
+          >
             👎 ({thumbDowns.length})
           </button>
         </p>
