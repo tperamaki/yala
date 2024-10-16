@@ -44,8 +44,11 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
           Your review
         </p>
       )}
-      {/* TODO: remember to change isOwnReview -> ! isOwnReview */}
-      {isOwnReview && (
+      {/* TODO: 
+        - Prettier buttons
+        - Thumbsignal emojis away from code (use unicode)
+       */}
+      {!isOwnReview && (
         <p className='mt-2'>
           <button
             className='mr-2'

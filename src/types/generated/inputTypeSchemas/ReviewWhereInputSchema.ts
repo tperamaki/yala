@@ -6,6 +6,7 @@ import { DateTimeFilterSchema } from './DateTimeFilterSchema';
 import { StringFilterSchema } from './StringFilterSchema';
 import { RestaurantRelationFilterSchema } from './RestaurantRelationFilterSchema';
 import { RestaurantWhereInputSchema } from './RestaurantWhereInputSchema';
+import { ThumbsignalListRelationFilterSchema } from './ThumbsignalListRelationFilterSchema';
 
 export const ReviewWhereInputSchema: z.ZodType<Prisma.ReviewWhereInput> = z.object({
   AND: z.union([ z.lazy(() => ReviewWhereInputSchema),z.lazy(() => ReviewWhereInputSchema).array() ]).optional(),
@@ -18,6 +19,7 @@ export const ReviewWhereInputSchema: z.ZodType<Prisma.ReviewWhereInput> = z.obje
   comment: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   imageId: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   restaurant: z.union([ z.lazy(() => RestaurantRelationFilterSchema),z.lazy(() => RestaurantWhereInputSchema) ]).optional(),
+  thumbsignals: z.lazy(() => ThumbsignalListRelationFilterSchema).optional()
 }).strict();
 
 export default ReviewWhereInputSchema;
