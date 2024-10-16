@@ -15,6 +15,9 @@ import { revalidatePath } from 'next/cache';
 export const getReviews = async (restaurantId: number) => {
   const findManyArgs = ReviewFindManyArgsSchema.parse({
     where: { restaurantId },
+    include: {
+      thumbsignals: true,
+    },
   });
   return z
     .array(ReviewSchema)

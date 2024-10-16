@@ -3,14 +3,14 @@ generator client {
 }
 
 generator zod {
-  provider          = "zod-prisma-types"
-  useMultipleFiles  = true
-  output = "../src/types/generated"
+  provider         = "zod-prisma-types"
+  useMultipleFiles = true
+  output           = "../src/types/generated"
 }
 
 generator erd {
   provider = "prisma-erd-generator"
-  output = "../docs/datamodel.md"
+  output   = "../docs/datamodel.md"
 }
 
 // datasource db {
@@ -24,41 +24,53 @@ datasource db {
 }
 
 model Category {
-  id            Int          @id @default(autoincrement())
-  name          String       @unique
-  restaurants   CategoriesOnRestaurants[]
-  createdAt     DateTime     @default(now())
-  createdBy     String?
+  id          Int                       @id @default(autoincrement())
+  name        String                    @unique
+  restaurants CategoriesOnRestaurants[]
+  createdAt   DateTime                  @default(now())
+  createdBy   String?
 }
 
 model Restaurant {
-  id            Int          @id @default(autoincrement())
-  name          String       @unique
-  categories    CategoriesOnRestaurants[]
-  reviews       Review[]
-  createdAt     DateTime     @default(now())
-  createdBy     String
+  id         Int                       @id @default(autoincrement())
+  name       String                    @unique
+  categories CategoriesOnRestaurants[]
+  reviews    Review[]
+  createdAt  DateTime                  @default(now())
+  createdBy  String
 }
 
 model Review {
-  restaurant    Restaurant   @relation(fields: [restaurantId], references: [id])
-  restaurantId  Int
-  rating        Int
-  createdAt     DateTime     @default(now())
-  createdBy     String
-  comment       String       @default("")
-  imageId       String       @default("")
-  
+  restaurant   Restaurant    @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+  rating       Int
+  createdAt    DateTime      @default(now())
+  createdBy    String
+  comment      String        @default("")
+  imageId      String        @default("")
+  thumbsignals Thumbsignal[]
+
   @@id([restaurantId, createdBy])
 }
 
+model Thumbsignal {
+  review               Review   @relation(fields: [reviewedRestaurantId, reviewCreatedBy], references: [restaurantId, createdBy])
+  reviewedRestaurantId Int
+  reviewCreatedBy      String
+  signalVariant        String
+  createdAt            DateTime @default(now())
+  createdBy            String
+
+  @@id([reviewedRestaurantId, reviewCreatedBy, createdBy])
+}
+
 model CategoriesOnRestaurants {
-  category      Category     @relation(fields: [categoryId], references: [id])
-  categoryId    Int
-  restaurant    Restaurant   @relation(fields: [restaurantId], references: [id])
-  restaurantId  Int
-  assignedAt    DateTime     @default(now())
-  assignedBy    String?
+  category     Category   @relation(fields: [categoryId], references: [id])
+  categoryId   Int
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+  assignedAt   DateTime   @default(now())
+  assignedBy   String?
 
   @@id([categoryId, restaurantId])
 }

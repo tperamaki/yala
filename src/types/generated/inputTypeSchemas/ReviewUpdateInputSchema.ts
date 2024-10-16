@@ -5,6 +5,7 @@ import { IntFieldUpdateOperationsInputSchema } from './IntFieldUpdateOperationsI
 import { DateTimeFieldUpdateOperationsInputSchema } from './DateTimeFieldUpdateOperationsInputSchema';
 import { StringFieldUpdateOperationsInputSchema } from './StringFieldUpdateOperationsInputSchema';
 import { RestaurantUpdateOneRequiredWithoutReviewsNestedInputSchema } from './RestaurantUpdateOneRequiredWithoutReviewsNestedInputSchema';
+import { ThumbsignalUpdateManyWithoutReviewNestedInputSchema } from './ThumbsignalUpdateManyWithoutReviewNestedInputSchema';
 
 export const ReviewUpdateInputSchema: z.ZodType<Prisma.ReviewUpdateInput> = z.object({
   rating: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
@@ -12,7 +13,8 @@ export const ReviewUpdateInputSchema: z.ZodType<Prisma.ReviewUpdateInput> = z.ob
   createdBy: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   comment: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   imageId: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  restaurant: z.lazy(() => RestaurantUpdateOneRequiredWithoutReviewsNestedInputSchema).optional()
+  restaurant: z.lazy(() => RestaurantUpdateOneRequiredWithoutReviewsNestedInputSchema).optional(),
+  thumbsignals: z.lazy(() => ThumbsignalUpdateManyWithoutReviewNestedInputSchema).optional()
 }).strict();
 
 export default ReviewUpdateInputSchema;

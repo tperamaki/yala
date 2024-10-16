@@ -12,6 +12,8 @@ import {
   RestaurantSchema,
   Review,
   ReviewSchema,
+  Thumbsignal,
+  ThumbsignalSchema,
 } from '@/types/generated';
 import { z } from 'zod';
 import { getSession } from '@auth0/nextjs-auth0';
@@ -20,7 +22,7 @@ import { revalidatePath } from 'next/cache';
 
 const enhanceRestaurant = (
   restaurant: Restaurant & {
-    reviews: Review[];
+    reviews: (Review & { thumbsignals: Thumbsignal[] })[];
   },
 ) => {
   const { reviews, ...rest } = restaurant;
@@ -38,7 +40,9 @@ export const getRestaurants = async () => {
   const data = await prisma.restaurant.findMany({
     include: {
       categories: { include: { category: true } },
-      reviews: true,
+      reviews: {
+        include: { thumbsignals: true },
+      },
     },
   });
 
@@ -48,7 +52,11 @@ export const getRestaurants = async () => {
         categories: z.array(
           CategoriesOnRestaurantsSchema.extend({ category: CategorySchema }),
         ),
-        reviews: z.array(ReviewSchema),
+        reviews: z.array(
+          ReviewSchema.extend({
+            thumbsignals: z.array(ThumbsignalSchema),
+          }),
+        ),
         averageReview: z.number().optional(),
         reviewCount: z.number(),
       }),
@@ -63,7 +71,9 @@ export const getRestaurant = async (id: number) => {
     },
     include: {
       categories: { include: { category: true } },
-      reviews: true,
+      reviews: {
+        include: { thumbsignals: true },
+      },
     },
   });
 
@@ -75,7 +85,11 @@ export const getRestaurant = async (id: number) => {
     categories: z.array(
       CategoriesOnRestaurantsSchema.extend({ category: CategorySchema }),
     ),
-    reviews: z.array(ReviewSchema),
+    reviews: z.array(
+      ReviewSchema.extend({
+        thumbsignals: z.array(ThumbsignalSchema),
+      }),
+    ),
     averageReview: z.number().optional(),
     reviewCount: z.number(),
   }).parseAsync(enhanceRestaurant(data));

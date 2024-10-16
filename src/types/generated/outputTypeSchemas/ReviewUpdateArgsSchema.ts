@@ -5,6 +5,8 @@ import { ReviewUpdateInputSchema } from '../inputTypeSchemas/ReviewUpdateInputSc
 import { ReviewUncheckedUpdateInputSchema } from '../inputTypeSchemas/ReviewUncheckedUpdateInputSchema'
 import { ReviewWhereUniqueInputSchema } from '../inputTypeSchemas/ReviewWhereUniqueInputSchema'
 import { RestaurantArgsSchema } from "../outputTypeSchemas/RestaurantArgsSchema"
+import { ThumbsignalFindManyArgsSchema } from "../outputTypeSchemas/ThumbsignalFindManyArgsSchema"
+import { ReviewCountOutputTypeArgsSchema } from "../outputTypeSchemas/ReviewCountOutputTypeArgsSchema"
 // Select schema needs to be in file to prevent circular imports
 //------------------------------------------------------
 
@@ -16,6 +18,8 @@ export const ReviewSelectSchema: z.ZodType<Prisma.ReviewSelect> = z.object({
   comment: z.boolean().optional(),
   imageId: z.boolean().optional(),
   restaurant: z.union([z.boolean(),z.lazy(() => RestaurantArgsSchema)]).optional(),
+  thumbsignals: z.union([z.boolean(),z.lazy(() => ThumbsignalFindManyArgsSchema)]).optional(),
+  _count: z.union([z.boolean(),z.lazy(() => ReviewCountOutputTypeArgsSchema)]).optional(),
 }).strict()
 
 export const ReviewUpdateArgsSchema: z.ZodType<Prisma.ReviewUpdateArgs> = z.object({
