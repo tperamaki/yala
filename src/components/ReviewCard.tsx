@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Review, Thumbsignal } from '@/types/generated';
 import { sendThumbSignal } from '@/services/thumbsignal';
+import ThumbsignalButton from './ThumbsignalButton';
 
 export type ReviewCardProps = {
   review: Review & { thumbsignals: Thumbsignal[] };
@@ -48,11 +49,14 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
           Your review
         </p>
       )}
-      {!isOwnReview && (
-        <div className="mt-2">
-          <button
-            className="mr-2"
-            title="Vote thumbs up"
+      {/* Remember to change isOwnReview -> !isOwnReview
+          TODO: What is type? What does it do?
+      */}
+      {isOwnReview && (
+        <div className="mt-2 flex flex-row place-content-end">
+          <ThumbsignalButton
+            thumbsignalVariant="THUMB_UP"
+            thumbsignalAmount={thumbUps.length}
             onClick={async () => {
               const result = await sendThumbSignal(
                 'UP',
@@ -63,11 +67,10 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
                 alert('fail');
               }
             }}
-          >
-            👍 ({thumbUps.length})
-          </button>
-          <button
-            title="Vote thumbs down"
+          />
+          <ThumbsignalButton
+            thumbsignalVariant="THUMB_DOWN"
+            thumbsignalAmount={thumbDowns.length}
             onClick={async () => {
               const result = await sendThumbSignal(
                 'DOWN',
@@ -78,9 +81,7 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
                 alert('fail');
               }
             }}
-          >
-            👎 ({thumbDowns.length})
-          </button>
+          />
         </div>
       )}
     </div>
