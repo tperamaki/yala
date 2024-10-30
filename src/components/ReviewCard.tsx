@@ -52,38 +52,39 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
       {/* Remember to change isOwnReview -> !isOwnReview
           TODO: What is type? What does it do?
       */}
-      {isOwnReview && (
-        <div className="mt-2 flex flex-row place-content-end">
-          <ThumbsignalButton
-            thumbsignalVariant="THUMB_UP"
-            thumbsignalAmount={thumbUps.length}
-            onClick={async () => {
-              const result = await sendThumbSignal(
-                'UP',
-                review.restaurantId,
-                review.createdBy,
-              );
-              if (!result) {
-                alert('fail');
-              }
-            }}
-          />
-          <ThumbsignalButton
-            thumbsignalVariant="THUMB_DOWN"
-            thumbsignalAmount={thumbDowns.length}
-            onClick={async () => {
-              const result = await sendThumbSignal(
-                'DOWN',
-                review.restaurantId,
-                review.createdBy,
-              );
-              if (!result) {
-                alert('fail');
-              }
-            }}
-          />
-        </div>
-      )}
+
+      <div className="mt-2 flex flex-row place-content-end">
+        <ThumbsignalButton
+          thumbsignalVariant="THUMB_UP"
+          thumbsignalAmount={thumbUps.length}
+          disabled={isOwnReview}
+          onClick={async () => {
+            const result = await sendThumbSignal(
+              'UP',
+              review.restaurantId,
+              review.createdBy,
+            );
+            if (!result) {
+              alert('fail');
+            }
+          }}
+        />
+        <ThumbsignalButton
+          thumbsignalVariant="THUMB_DOWN"
+          thumbsignalAmount={thumbDowns.length}
+          disabled={isOwnReview}
+          onClick={async () => {
+            const result = await sendThumbSignal(
+              'DOWN',
+              review.restaurantId,
+              review.createdBy,
+            );
+            if (!result) {
+              alert('fail');
+            }
+          }}
+        />
+      </div>
     </div>
   );
 };

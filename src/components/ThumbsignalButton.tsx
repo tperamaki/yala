@@ -3,7 +3,6 @@
 /*
  * TODO: 
     - has been clicked-style
-    - disabled-style for when it's reviewer's own vote
     - emoji as unicode
  */
 
@@ -21,8 +20,10 @@ const variantClassName: Record<ThumbsignalVariant, string> = {
   THUMB_UP: 'rounded-l-full pl-4',
   THUMB_DOWN: 'rounded-r-full pr-4',
 };
-const buttonColorsClassName: string =
-  'bg-neutral-200 border-neutral-200 dark:bg-neutral-900 dark:border-neutral-900 hover:bg-neutral-300 hover:dark:bg-neutral-950 hover:border-neutral-300 hover:dark:border-neutral-950 disabled:border-neutral-300 disabled:bg-neutral-300 disabled:text-neutral-500';
+const buttonLightColorsClassName: string =
+  'bg-neutral-200 border-neutral-200 hover:bg-neutral-300 hover:border-neutral-300 hover:dark:border-neutral-950 disabled:border-neutral-300 disabled:bg-neutral-300 disabled:text-neutral-500';
+const buttonDarkColorsClassName: string =
+  'dark:bg-neutral-900 dark:border-neutral-900 hover:dark:bg-neutral-950 hover:dark:border-neutral-950 disabled:dark:border-neutral-900 disabled:dark:bg-neutral-900 disabled:dark:text-neutral-500';
 
 const ThumbsignalButton = ({
   thumbsignalVariant,
@@ -34,7 +35,7 @@ const ThumbsignalButton = ({
   return (
     <div>
       <button
-        className={`${variantClassName[thumbsignalVariant]} ${buttonColorsClassName} m max-w-max border-2 px-1 py-2 text-sm`}
+        className={`${variantClassName[thumbsignalVariant]} ${buttonLightColorsClassName} ${buttonDarkColorsClassName} m max-w-max border-2 px-1 py-2 text-sm`}
         type="button"
         title={thumbSignalUp ? 'Vote thumb up' : 'Vote thumb down'}
         disabled={disabled}
