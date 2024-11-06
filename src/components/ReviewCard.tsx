@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import { Review, Thumbsignal } from '@/types/generated';
-import { sendThumbSignal } from '@/services/thumbsignal';
+import { sendThumbSignal, findThumbsignal } from '@/services/thumbsignal';
 import ThumbsignalButton from './ThumbsignalButton';
+import { useEffect, useState } from 'react';
 
 export type ReviewCardProps = {
   review: Review & { thumbsignals: Thumbsignal[] };
@@ -11,6 +12,19 @@ export type ReviewCardProps = {
 const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
   const { rating, createdAt, comment, imageId } = review;
 
+  const [thumbsignalData, setThumbsignalData] = useState<Thumbsignal | null>(
+    null,
+  );
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await findThumbsignal(review);
+        setThumbsignalData(response);
+      } catch (error) {}
+    };
+
+    fetchData();
+  }, [review]); // TODO what was this dependency thing
   const thumbUps = review.thumbsignals.filter(
     (ts) => ts.signalVariant === 'UP',
   );
@@ -49,15 +63,12 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
           Your review
         </p>
       )}
-      {/* Remember to change isOwnReview -> !isOwnReview
-          TODO: What is type? What does it do?
-      */}
-
       <div className="mt-2 flex flex-row place-content-end">
         <ThumbsignalButton
           thumbsignalVariant="THUMB_UP"
           thumbsignalAmount={thumbUps.length}
           disabled={isOwnReview}
+          clicked={thumbsignalData?.signalVariant === 'UP'}
           onClick={async () => {
             const result = await sendThumbSignal(
               'UP',
@@ -73,6 +84,7 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
           thumbsignalVariant="THUMB_DOWN"
           thumbsignalAmount={thumbDowns.length}
           disabled={isOwnReview}
+          clicked={thumbsignalData?.signalVariant === 'DOWN'}
           onClick={async () => {
             const result = await sendThumbSignal(
               'DOWN',
