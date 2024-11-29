@@ -4,8 +4,35 @@ import 'server-only';
 import prisma from './client';
 import { getSession } from '@auth0/nextjs-auth0';
 import { getUserIdFromIdToken } from './utils';
+import { Review, Thumbsignal } from '@/types/generated';
 
 type SignalVariant = 'UP' | 'DOWN';
+
+export const findThumbsignal = async (
+  review: Review,
+): Promise<Thumbsignal | null> => {
+  const session = await getSession();
+
+  if (!session?.idToken) {
+    throw new Error('Unauthorized');
+  }
+
+  const currentUserId = getUserIdFromIdToken(session.idToken);
+
+  try {
+    const thumbsignal = await prisma.thumbsignal.findFirst({
+      where: {
+        reviewedRestaurantId: review.restaurantId,
+        reviewCreatedBy: review.createdBy,
+        createdBy: currentUserId,
+      },
+    });
+    return thumbsignal;
+  } catch (error) {
+    console.error('Could not find review');
+    return null;
+  }
+};
 
 export const sendThumbSignal = async (
   signalVariant: SignalVariant,
