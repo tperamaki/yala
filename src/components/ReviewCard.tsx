@@ -24,7 +24,7 @@ const ReviewCard = ({ review, isOwnReview }: ReviewCardProps) => {
     };
 
     fetchData();
-  }, [review]); // TODO what was this dependency thing
+  }, [review]);
   const thumbUps = review.thumbsignals.filter(
     (ts) => ts.signalVariant === 'UP',
   );

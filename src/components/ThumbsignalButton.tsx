@@ -1,11 +1,12 @@
 'use client';
 
-/*
- * TODO: 
-    - emoji as unicode
- */
-
 type ThumbsignalVariant = 'THUMB_UP' | 'THUMB_DOWN';
+
+type ThumbsignalData = {
+  unicode: number;
+  label: string;
+  title: string;
+};
 
 export type ThumbsignalButtonProps = {
   thumbsignalVariant: ThumbsignalVariant;
@@ -20,6 +21,20 @@ const variantClassName: Record<ThumbsignalVariant, string> = {
   THUMB_UP: 'rounded-l-full pl-4',
   THUMB_DOWN: 'rounded-r-full pr-4',
 };
+
+const signals: Record<ThumbsignalVariant, ThumbsignalData> = {
+  THUMB_UP: {
+    unicode: 0x1f44d,
+    label: 'thumb up',
+    title: 'vote thumbs up',
+  },
+  THUMB_DOWN: {
+    unicode: 0x1f44e,
+    label: 'thumb down',
+    title: 'vote thumbs down',
+  },
+};
+
 const buttonLightColorsClassName: string =
   'bg-neutral-200 hover:bg-neutral-300 disabled:border-neutral-300 disabled:bg-neutral-300 disabled:text-neutral-500';
 const buttonDarkColorsClassName: string =
@@ -35,21 +50,26 @@ const ThumbsignalButton = ({
   clicked,
   onClick,
 }: ThumbsignalButtonProps) => {
-  const thumbSignalUp: boolean = thumbsignalVariant == 'THUMB_UP';
+  const thumbsignal = signals[thumbsignalVariant];
+
   return (
     <div>
       <button
         className={`${variantClassName[thumbsignalVariant]} ${clicked ? buttonClickedClassName : buttonNotClickedClassName} ${buttonLightColorsClassName} ${buttonDarkColorsClassName} m max-w-max border-2 px-1 py-2 text-sm`}
         type="button"
-        title={thumbSignalUp ? 'Vote thumb up' : 'Vote thumb down'}
+        title={thumbsignal.title}
         disabled={disabled}
         onClick={onClick}
       >
-        {thumbsignalVariant == 'THUMB_UP' ? '👍' : '👎'} {thumbsignalAmount}
+        <span
+          style={{ marginRight: 8 }}
+          role="img"
+          aria-label={thumbsignal.label}
+        >
+          {String.fromCodePoint(thumbsignal.unicode)}
+        </span>
+        {thumbsignalAmount}
       </button>
-
-      {/* is this visible ?*/}
-      {thumbSignalUp && <div className="w-px bg-black" />}
     </div>
   );
 };
