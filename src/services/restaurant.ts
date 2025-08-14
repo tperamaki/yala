@@ -18,7 +18,6 @@ import {
 import { z } from 'zod';
 import { getSession } from '@auth0/nextjs-auth0';
 import { getUserIdFromIdToken } from './utils';
-import { revalidatePath } from 'next/cache';
 
 const enhanceRestaurant = (
   restaurant: Restaurant & {
@@ -176,8 +175,6 @@ export const addRestaurant = async <State>(
         restaurantId: createdRestaurant.id,
       })),
     });
-
-    revalidatePath('/restaurant');
     return { ...validatedFields.data, errors: undefined };
   } catch (error) {
     console.error(error);
